@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S&P 500 Drawdowns by Decade - Avg vs Median</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 50px 40px;
+            color: #fff;
+        }
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 1.9rem;
+            color: #e94560;
+        }
+        .subtitle {
+            text-align: center;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+            font-size: 0.95rem;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        .legend-box {
+            width: 20px;
+            height: 12px;
+            border-radius: 3px;
+        }
+        .legend-avg { background: linear-gradient(90deg, #e94560, #ff6b6b); }
+        .legend-med { background: linear-gradient(90deg, #3498db, #5dade2); }
+        .legend-worst { background: linear-gradient(90deg, #8e44ad, #9b59b6); }
+
+        .chart {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .decade {
+            width: 70px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: right;
+            color: #fff;
+        }
+        .bars {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .bar-label {
+            width: 45px;
+            font-size: 0.7rem;
+            color: #888;
+            text-align: right;
+        }
+        .bar-container {
+            flex: 1;
+            height: 18px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .bar {
+            height: 100%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: #fff;
+        }
+        .bar-avg { background: linear-gradient(90deg, #c0392b, #e74c3c); }
+        .bar-med { background: linear-gradient(90deg, #2980b9, #3498db); }
+        .bar-worst { background: linear-gradient(90deg, #6c3483, #8e44ad); }
+
+        .bar span {
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .insight {
+            margin-top: 35px;
+            padding: 20px 25px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border-left: 4px solid #e94560;
+        }
+        .insight-title {
+            font-weight: 600;
+            color: #e94560;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        .insight-text {
+            color: #aaa;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        .highlight {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .note {
+            text-align: center;
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 25px;
+            font-style: italic;
+        }
+        .source {
+            text-align: center;
+            margin-top: 20px;
+            color: #555;
+            font-size: 0.8rem;
+        }
+        .source a {
+            color: #e94560;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>S&P 500 Intra-Year Drawdowns by Decade</h1>
+        <p class="subtitle">Average vs Median | Sorted by Average (worst to best)</p>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box legend-worst"></div>
+                <span>Worst Year</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box legend-avg"></div>
+                <span>Average</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box legend-med"></div>
+                <span>Median</span>
+            </div>
+        </div>
+
+        <div class="chart">
+            <!-- 1930s: worst 1931 -49.67%, avg 26.07%, med 20.40% -->
+            <div class="row">
+                <span class="decade">1930s</span>
+                <div class="bars">
+                    <div class="bar-row">
+                        <span class="bar-label">Worst</span>
+                        <div class="bar-container">
+                            <div class="bar bar-worst" style="width: calc(49.67 / 55 * 100%);"><span>1931: -49.7%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Avg</span>
+                        <div class="bar-container">
+                            <div class="bar bar-avg" style="width: calc(26.07 / 55 * 100%);"><span>-26.1%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Med</span>
+                        <div class="bar-container">
+                            <div class="bar bar-med" style="width: calc(20.40 / 55 * 100%);"><span>-20.4%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2000s: worst 2008 -49.53%, avg 17.92%, med 12.49% -->
+            <div class="row">
+                <span class="decade">2000s</span>
+                <div class="bars">
+                    <div class="bar-row">
+                        <span class="bar-label">Worst</span>
+                        <div class="bar-container">
+                            <div class="bar bar-worst" style="width: calc(49.53 / 55 * 100%);"><span>2008: -49.5%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Avg</span>
+                        <div class="bar-container">
+                            <div class="bar bar-avg" style="width: calc(17.92 / 55 * 100%);"><span>-17.9%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Med</span>
+                        <div class="bar-container">
+                            <div class="bar bar-med" style="width: calc(12.49 / 55 * 100%);"><span>-12.5%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1970s: worst 1974 -37.51%, avg 10.97%, med 6.08% -->
+            <div class="row">
+                <span class="decade">1970s</span>
+                <div class="bars">
+                    <div class="bar-row">
+                        <span class="bar-label">Worst</span>
+                        <div class="bar-container">
+                            <div class="bar bar-worst" style="width: calc(37.51 / 55 * 100%);"><span>1974: -37.5%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Avg</span>
+                        <div class="bar-container">
+                            <div class="bar bar-avg" style="width: calc(10.97 / 55 * 100%);"><span>-11.0%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Med</span>
+                        <div class="bar-container">
+                            <div class="bar bar-med" style="width: calc(6.08 / 55 * 100%);"><span>-6.1%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2020s: worst 2020 -32.16%, avg 11.88%, med 2.49% -->
+            <div class="row">
+                <span class="decade">2020s*</span>
+                <div class="bars">
+                    <div class="bar-row">
+                        <span class="bar-label">Worst</span>
+                        <div class="bar-container">
+                            <div class="bar bar-worst" style="width: calc(32.16 / 55 * 100%);"><span>2020: -32.2%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Avg</span>
+                        <div class="bar-container">
+                            <div class="bar bar-avg" style="width: calc(11.88 / 55 * 100%);"><span>-11.9%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Med</span>
+                        <div class="bar-container">
+                            <div class="bar bar-med" style="width: calc(2.49 / 55 * 100%);"><span>-2.5%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1960s: worst 1962 -28.23%, avg 9.65%, med 7.42% -->
+            <div class="row">
+                <span class="decade">1960s</span>
+                <div class="bars">
+                    <div class="bar-row">
+                        <span class="bar-label">Worst</span>
+                        <div class="bar-container">
+                            <div class="bar bar-worst" style="width: calc(28.23 / 55 * 100%);"><span>1962: -28.2%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Avg</span>
+                        <div class="bar-container">
+                            <div class="bar bar-avg" style="width: calc(9.65 / 55 * 100%);"><span>-9.7%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Med</span>
+                        <div class="bar-container">
+                            <div class="bar bar-med" style="width: calc(7.42 / 55 * 100%);"><span>-7.4%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1940s: worst 1940 -27.85%, avg 11.33%, med 10.43% -->
+            <div class="row">
+                <span class="decade">1940s</span>
+                <div class="bars">
+                    <div class="bar-row">
+                        <span class="bar-label">Worst</span>
+                        <div class="bar-container">
+                            <div class="bar bar-worst" style="width: calc(27.85 / 55 * 100%);"><span>1940: -27.9%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Avg</span>
+                        <div class="bar-container">
+                            <div class="bar bar-avg" style="width: calc(11.33 / 55 * 100%);"><span>-11.3%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Med</span>
+                        <div class="bar-container">
+                            <div class="bar bar-med" style="width: calc(10.43 / 55 * 100%);"><span>-10.4%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1920s: worst 1929 -27.47%, avg 15.75%, med 15.75% -->
+            <div class="row">
+                <span class="decade">1920s*</span>
+                <div class="bars">
+                    <div class="bar-row">
+                        <span class="bar-label">Worst</span>
+                        <div class="bar-container">
+                            <div class="bar bar-worst" style="width: calc(27.47 / 55 * 100%);"><span>1929: -27.5%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Avg</span>
+                        <div class="bar-container">
+                            <div class="bar bar-avg" style="width: calc(15.75 / 55 * 100%);"><span>-15.7%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Med</span>
+                        <div class="bar-container">
+                            <div class="bar bar-med" style="width: calc(15.75 / 55 * 100%);"><span>-15.7%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1980s: worst 1981 -18.83%, avg 8.19%, med 7.37% -->
+            <div class="row">
+                <span class="decade">1980s</span>
+                <div class="bars">
+                    <div class="bar-row">
+                        <span class="bar-label">Worst</span>
+                        <div class="bar-container">
+                            <div class="bar bar-worst" style="width: calc(18.83 / 55 * 100%);"><span>1981: -18.8%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Avg</span>
+                        <div class="bar-container">
+                            <div class="bar bar-avg" style="width: calc(8.19 / 55 * 100%);"><span>-8.2%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Med</span>
+                        <div class="bar-container">
+                            <div class="bar bar-med" style="width: calc(7.37 / 55 * 100%);"><span>-7.4%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1990s: worst 1990 -16.66%, avg 5.04%, med 4.48% -->
+            <div class="row">
+                <span class="decade">1990s</span>
+                <div class="bars">
+                    <div class="bar-row">
+                        <span class="bar-label">Worst</span>
+                        <div class="bar-container">
+                            <div class="bar bar-worst" style="width: calc(16.66 / 55 * 100%);"><span>1990: -16.7%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Avg</span>
+                        <div class="bar-container">
+                            <div class="bar bar-avg" style="width: calc(5.04 / 55 * 100%);"><span>-5.0%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Med</span>
+                        <div class="bar-container">
+                            <div class="bar bar-med" style="width: calc(4.48 / 55 * 100%);"><span>-4.5%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1950s: worst 1957 -16.48%, avg 4.67%, med 2.91% -->
+            <div class="row">
+                <span class="decade">1950s</span>
+                <div class="bars">
+                    <div class="bar-row">
+                        <span class="bar-label">Worst</span>
+                        <div class="bar-container">
+                            <div class="bar bar-worst" style="width: calc(16.48 / 55 * 100%);"><span>1957: -16.5%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Avg</span>
+                        <div class="bar-container">
+                            <div class="bar bar-avg" style="width: calc(4.67 / 55 * 100%);"><span>-4.7%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Med</span>
+                        <div class="bar-container">
+                            <div class="bar bar-med" style="width: calc(2.91 / 55 * 100%);"><span>-2.9%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2010s: worst 2011 -14.54%, avg 6.54%, med 7.65% -->
+            <div class="row">
+                <span class="decade">2010s</span>
+                <div class="bars">
+                    <div class="bar-row">
+                        <span class="bar-label">Worst</span>
+                        <div class="bar-container">
+                            <div class="bar bar-worst" style="width: calc(14.54 / 55 * 100%);"><span>2011: -14.5%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Avg</span>
+                        <div class="bar-container">
+                            <div class="bar bar-avg" style="width: calc(6.54 / 55 * 100%);"><span>-6.5%</span></div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <span class="bar-label">Med</span>
+                        <div class="bar-container">
+                            <div class="bar bar-med" style="width: calc(7.65 / 55 * 100%);"><span>-7.7%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="insight">
+            <div class="insight-title">Key Insight</div>
+            <div class="insight-text">
+                When avg >> median, a few extreme crashes skew the data. The <span class="highlight">2020s</span> shows the biggest gap (-11.9% avg vs -2.5% median) — most years were calm, but 2020, 2022, and 2025 had major crashes. The <span class="highlight">1970s</span> also shows this pattern with the 1974 crash (-37.5%) pulling up the average.
+            </div>
+        </div>
+
+        <p class="note">* Partial decade: 1920s has 2 years, 2020s has 7 years</p>
+        <p class="source">Data source: <a href="https://www.slickcharts.com/sp500/drawdown" target="_blank">SlickCharts</a></p>
+    </div>
+</body>
+</html>
