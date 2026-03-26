@@ -23,16 +23,39 @@ def fetch_quote(symbol):
     url = (
         "https://query1.finance.yahoo.com/v8/finance/chart/"
         + urllib.request.quote(symbol, safe="")
-        + "?range=1d&interval=5m"
+        + "?range=ytd&interval=1d"
     )
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req, timeout=15) as resp:
         data = json.loads(resp.read())
-    meta = data["chart"]["result"][0]["meta"]
+    result = data["chart"]["result"][0]
+    meta = result["meta"]
+
+    price = meta["regularMarketPrice"]
+    ath = meta["fiftyTwoWeekHigh"]
+    low_since_ath = meta["fiftyTwoWeekLow"]
+
+    # Find YTD low from actual price data if available
+    closes = result.get("indicators", {}).get("quote", [{}])[0].get("low", [])
+    valid_closes = [c for c in closes if c is not None]
+    ytd_low = min(valid_closes) if valid_closes else low_since_ath
+
+    drawdown_at_low = ((ytd_low - ath) / ath) * 100 if ath else 0
+    drawdown_current = ((price - ath) / ath) * 100 if ath else 0
+    gain_from_low = ((price - ytd_low) / ytd_low) * 100 if ytd_low else 0
+    gain_to_ath = ((ath - price) / price) * 100 if price else 0
+
     return {
-        "price": meta["regularMarketPrice"],
+        "price": round(price, 2),
         "previousClose": meta.get("chartPreviousClose", meta.get("previousClose")),
         "marketState": meta.get("marketState", "UNKNOWN"),
+        "fiftyTwoWeekHigh": round(ath, 2),
+        "fiftyTwoWeekLow": round(low_since_ath, 2),
+        "ytdLow": round(ytd_low, 2),
+        "drawdownAtLow": round(drawdown_at_low, 2),
+        "drawdownCurrent": round(drawdown_current, 2),
+        "gainFromLow": round(gain_from_low, 2),
+        "gainToATH": round(gain_to_ath, 2),
     }
 
 

@@ -138,6 +138,9 @@
       color: #333;
     }
 
+    .value.green { color: #27ae60; }
+    .value.red   { color: #e74c3c; }
+
     /* ── Comparison Table Section ── */
     .table-section {
       background: #fff;
@@ -510,16 +513,28 @@
         <div class="card-drawdown loading" id="sp500-drawdown">—</div>
         <div class="card-meta">
           <div class="card-meta-row">
-            <span class="label">ATH Price</span>
-            <span class="value" id="sp500-ath-price">Loading…</span>
-          </div>
-          <div class="card-meta-row">
-            <span class="label">Current Price</span>
+            <span class="label">Last Closing Price</span>
             <span class="value" id="sp500-current">Loading…</span>
           </div>
           <div class="card-meta-row">
-            <span class="label">ATH Date</span>
-            <span class="value" id="sp500-ath-date">Loading…</span>
+            <span class="label">All Time High</span>
+            <span class="value green" id="sp500-ath-price">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Lowest Price Since ATH</span>
+            <span class="value green" id="sp500-ytd-low">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Drawdown At Lowest</span>
+            <span class="value red" id="sp500-dd-at-low">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Gain From Lowest</span>
+            <span class="value green" id="sp500-gain-from-low">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Gain Required to Reach ATH</span>
+            <span class="value green" id="sp500-gain-to-ath">Loading…</span>
           </div>
         </div>
       </div>
@@ -529,16 +544,28 @@
         <div class="card-drawdown loading" id="ndx-drawdown">—</div>
         <div class="card-meta">
           <div class="card-meta-row">
-            <span class="label">ATH Price</span>
-            <span class="value" id="ndx-ath-price">Loading…</span>
-          </div>
-          <div class="card-meta-row">
-            <span class="label">Current Price</span>
+            <span class="label">Last Closing Price</span>
             <span class="value" id="ndx-current">Loading…</span>
           </div>
           <div class="card-meta-row">
-            <span class="label">ATH Date</span>
-            <span class="value" id="ndx-ath-date">Loading…</span>
+            <span class="label">All Time High</span>
+            <span class="value green" id="ndx-ath-price">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Lowest Price Since ATH</span>
+            <span class="value green" id="ndx-ytd-low">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Drawdown At Lowest</span>
+            <span class="value red" id="ndx-dd-at-low">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Gain From Lowest</span>
+            <span class="value green" id="ndx-gain-from-low">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Gain Required to Reach ATH</span>
+            <span class="value green" id="ndx-gain-to-ath">Loading…</span>
           </div>
         </div>
       </div>
@@ -548,16 +575,28 @@
         <div class="card-drawdown loading" id="ixic-drawdown">—</div>
         <div class="card-meta">
           <div class="card-meta-row">
-            <span class="label">ATH Price</span>
-            <span class="value" id="ixic-ath-price">Loading…</span>
-          </div>
-          <div class="card-meta-row">
-            <span class="label">Current Price</span>
+            <span class="label">Last Closing Price</span>
             <span class="value" id="ixic-current">Loading…</span>
           </div>
           <div class="card-meta-row">
-            <span class="label">ATH Date</span>
-            <span class="value" id="ixic-ath-date">Loading…</span>
+            <span class="label">All Time High</span>
+            <span class="value green" id="ixic-ath-price">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Lowest Price Since ATH</span>
+            <span class="value green" id="ixic-ytd-low">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Drawdown At Lowest</span>
+            <span class="value red" id="ixic-dd-at-low">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Gain From Lowest</span>
+            <span class="value green" id="ixic-gain-from-low">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Gain Required to Reach ATH</span>
+            <span class="value green" id="ixic-gain-to-ath">Loading…</span>
           </div>
         </div>
       </div>
@@ -868,8 +907,7 @@
       for (const { key, prefix } of indices) {
         const ath = ATH[key];
         document.getElementById(prefix + "-ath-price").textContent = formatPrice(ath.price);
-        document.getElementById(prefix + "-ath-date").textContent  = formatDate(ath.date);
-        // Current price and live drawdown remain "Loading…" until live fetch task
+        // Other fields remain "Loading…" until live fetch
       }
     }
 
@@ -942,9 +980,17 @@
         for (var i = 0; i < keys.length; i++) {
           var key = keys[i];
           if (quotes[key]) {
-            updateCardDrawdown(key, quotes[key].price);
-            updateCurrentYearTable(key, quotes[key].price);
-            if (quotes[key].marketState) marketState = quotes[key].marketState;
+            var q = quotes[key];
+            updateCardDrawdown(key, q.price);
+            updateCurrentYearTable(key, q.price);
+            if (q.marketState) marketState = q.marketState;
+
+            document.getElementById(key + "-current").textContent       = formatPrice(q.price);
+            document.getElementById(key + "-ath-price").textContent     = formatPrice(q.fiftyTwoWeekHigh);
+            document.getElementById(key + "-ytd-low").textContent       = formatPrice(q.ytdLow);
+            document.getElementById(key + "-dd-at-low").textContent     = q.drawdownAtLow.toFixed(2) + "%";
+            document.getElementById(key + "-gain-from-low").textContent = "+" + q.gainFromLow.toFixed(2) + "%";
+            document.getElementById(key + "-gain-to-ath").textContent   = "+" + q.gainToATH.toFixed(2) + "%";
           }
         }
 
