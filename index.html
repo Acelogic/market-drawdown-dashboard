@@ -751,80 +751,80 @@
 
     // ── S&P 500 (1928-2026) ───────────────────────────────────────────────────
     const SP500_DATA = [
-      {year:1928,drawdown:-10.27,ret:37.11},{year:1929,drawdown:-44.57,ret:-11.91},{year:1930,drawdown:-44.29,ret:-28.48},
-      {year:1931,drawdown:-57.51,ret:-47.07},{year:1932,drawdown:-51.00,ret:-14.78},{year:1933,drawdown:-29.43,ret:44.08},
-      {year:1934,drawdown:-29.27,ret:-4.71},{year:1935,drawdown:-15.87,ret:41.37},{year:1936,drawdown:-12.77,ret:27.92},
-      {year:1937,drawdown:-45.53,ret:-38.59},{year:1938,drawdown:-28.87,ret:24.55},{year:1939,drawdown:-21.24,ret:-5.18},
-      {year:1940,drawdown:-29.60,ret:-15.09},{year:1941,drawdown:-22.93,ret:-17.86},{year:1942,drawdown:-17.82,ret:12.43},
-      {year:1943,drawdown:-13.05,ret:19.45},{year:1944,drawdown:-6.93,ret:13.80},{year:1945,drawdown:-6.88,ret:30.72},
-      {year:1946,drawdown:-26.65,ret:-11.87},{year:1947,drawdown:-14.68,ret:0.00},{year:1948,drawdown:-13.54,ret:-0.65},
-      {year:1949,drawdown:-13.20,ret:10.46},{year:1950,drawdown:-14.02,ret:21.68},{year:1951,drawdown:-8.11,ret:16.35},
-      {year:1952,drawdown:-6.85,ret:11.78},{year:1953,drawdown:-14.82,ret:-6.62},{year:1954,drawdown:-4.42,ret:45.02},
-      {year:1955,drawdown:-10.59,ret:26.40},{year:1956,drawdown:-10.60,ret:2.62},{year:1957,drawdown:-20.66,ret:-14.31},
-      {year:1958,drawdown:-4.36,ret:38.06},{year:1959,drawdown:-9.17,ret:8.48},{year:1960,drawdown:-13.56,ret:-2.97},
-      {year:1961,drawdown:-6.23,ret:23.13},{year:1962,drawdown:-26.44,ret:-11.81},{year:1963,drawdown:-6.54,ret:18.89},
-      {year:1964,drawdown:-3.55,ret:12.97},{year:1965,drawdown:-9.60,ret:9.06},{year:1966,drawdown:-22.18,ret:-13.09},
-      {year:1967,drawdown:-6.61,ret:20.09},{year:1968,drawdown:-9.31,ret:7.66},{year:1969,drawdown:-15.98,ret:-11.36},
-      {year:1970,drawdown:-25.86,ret:0.10},{year:1971,drawdown:-13.94,ret:10.79},{year:1972,drawdown:-5.14,ret:15.63},
-      {year:1973,drawdown:-23.35,ret:-17.37},{year:1974,drawdown:-37.60,ret:-29.72},{year:1975,drawdown:-14.14,ret:31.55},
-      {year:1976,drawdown:-8.37,ret:19.15},{year:1977,drawdown:-15.22,ret:-11.50},{year:1978,drawdown:-13.55,ret:1.06},
-      {year:1979,drawdown:-10.25,ret:12.31},{year:1980,drawdown:-17.07,ret:25.77},{year:1981,drawdown:-18.35,ret:-9.73},
-      {year:1982,drawdown:-16.56,ret:14.76},{year:1983,drawdown:-6.91,ret:17.27},{year:1984,drawdown:-12.68,ret:1.40},
-      {year:1985,drawdown:-7.66,ret:26.33},{year:1986,drawdown:-9.42,ret:14.62},{year:1987,drawdown:-33.51,ret:2.03},
-      {year:1988,drawdown:-7.64,ret:12.40},{year:1989,drawdown:-7.56,ret:27.25},{year:1990,drawdown:-19.92,ret:-6.56},
-      {year:1991,drawdown:-5.60,ret:26.31},{year:1992,drawdown:-6.24,ret:4.46},{year:1993,drawdown:-4.99,ret:7.06},
-      {year:1994,drawdown:-8.94,ret:-1.54},{year:1995,drawdown:-2.53,ret:34.11},{year:1996,drawdown:-7.64,ret:20.26},
-      {year:1997,drawdown:-10.80,ret:31.01},{year:1998,drawdown:-19.34,ret:26.67},{year:1999,drawdown:-12.08,ret:19.53},
-      {year:2000,drawdown:-17.20,ret:-10.14},{year:2001,drawdown:-29.70,ret:-13.04},{year:2002,drawdown:-33.75,ret:-23.37},
-      {year:2003,drawdown:-14.05,ret:26.38},{year:2004,drawdown:-8.16,ret:8.99},{year:2005,drawdown:-7.17,ret:3.00},
-      {year:2006,drawdown:-7.70,ret:13.62},{year:2007,drawdown:-10.09,ret:3.53},{year:2008,drawdown:-48.01,ret:-38.49},
-      {year:2009,drawdown:-27.62,ret:23.45},{year:2010,drawdown:-15.99,ret:12.78},{year:2011,drawdown:-19.39,ret:-0.00},
-      {year:2012,drawdown:-9.94,ret:13.41},{year:2013,drawdown:-5.76,ret:29.60},{year:2014,drawdown:-7.40,ret:11.39},
-      {year:2015,drawdown:-12.35,ret:-0.73},{year:2016,drawdown:-9.30,ret:9.54},{year:2017,drawdown:-2.80,ret:19.42},
-      {year:2018,drawdown:-19.78,ret:-6.24},{year:2019,drawdown:-6.84,ret:28.88},{year:2020,drawdown:-33.92,ret:16.26},
-      {year:2021,drawdown:-5.21,ret:26.89},{year:2022,drawdown:-25.43,ret:-19.44},{year:2023,drawdown:-10.28,ret:24.23},
-      {year:2024,drawdown:-8.49,ret:23.31},{year:2025,drawdown:-18.90,ret:16.39},{year:2026,drawdown:-6.77,ret:-3.70}
+      {year:1928,drawdown:-4.02,ret:37.11},{year:1929,drawdown:-27.47,ret:-11.91},{year:1930,drawdown:-32.68,ret:-28.48},
+      {year:1931,drawdown:-49.67,ret:-47.07},{year:1932,drawdown:-45.81,ret:-14.78},{year:1933,drawdown:-20.09,ret:44.08},
+      {year:1934,drawdown:-16.15,ret:-4.71},{year:1935,drawdown:-15.16,ret:41.37},{year:1936,drawdown:-0.22,ret:27.92},
+      {year:1937,drawdown:-40.80,ret:-38.59},{year:1938,drawdown:-19.43,ret:24.55},{year:1939,drawdown:-20.70,ret:-5.18},
+      {year:1940,drawdown:-27.85,ret:-15.09},{year:1941,drawdown:-20.89,ret:-17.86},{year:1942,drawdown:-14.04,ret:12.43},
+      {year:1943,drawdown:0,ret:19.45},{year:1944,drawdown:-0.94,ret:13.80},{year:1945,drawdown:-0.53,ret:30.72},
+      {year:1946,drawdown:-18.66,ret:-11.87},{year:1947,drawdown:-10.00,ret:0.00},{year:1948,drawdown:-9.54,ret:-0.65},
+      {year:1949,drawdown:-10.86,ret:10.46},{year:1950,drawdown:-0.77,ret:21.68},{year:1951,drawdown:0,ret:16.35},
+      {year:1952,drawdown:-2.86,ret:11.78},{year:1953,drawdown:-14.53,ret:-6.62},{year:1954,drawdown:-0.04,ret:45.02},
+      {year:1955,drawdown:-3.89,ret:26.40},{year:1956,drawdown:-5.21,ret:2.62},{year:1957,drawdown:-16.48,ret:-14.31},
+      {year:1958,drawdown:0,ret:38.06},{year:1959,drawdown:-2.95,ret:8.48},{year:1960,drawdown:-12.84,ret:-2.97},
+      {year:1961,drawdown:-0.93,ret:23.13},{year:1962,drawdown:-28.23,ret:-11.81},{year:1963,drawdown:-1.24,ret:18.89},
+      {year:1964,drawdown:-0.27,ret:12.97},{year:1965,drawdown:-4.74,ret:9.06},{year:1966,drawdown:-21.80,ret:-13.09},
+      {year:1967,drawdown:-1.12,ret:20.09},{year:1968,drawdown:-10.10,ret:7.66},{year:1969,drawdown:-15.23,ret:-11.36},
+      {year:1970,drawdown:-25.47,ret:0.10},{year:1971,drawdown:-3.05,ret:10.79},{year:1972,drawdown:-1.20,ret:15.63},
+      {year:1973,drawdown:-22.87,ret:-17.37},{year:1974,drawdown:-37.51,ret:-29.72},{year:1975,drawdown:0,ret:31.55},
+      {year:1976,drawdown:-0.42,ret:19.15},{year:1977,drawdown:-16.24,ret:-11.50},{year:1978,drawdown:-9.10,ret:1.06},
+      {year:1979,drawdown:-0.93,ret:12.31},{year:1980,drawdown:-12.70,ret:25.77},{year:1981,drawdown:-18.83,ret:-9.73},
+      {year:1982,drawdown:-16.61,ret:14.76},{year:1983,drawdown:-1.82,ret:17.27},{year:1984,drawdown:-10.71,ret:1.40},
+      {year:1985,drawdown:-2.32,ret:26.33},{year:1986,drawdown:-4.11,ret:14.62},{year:1987,drawdown:-10.62,ret:2.03},
+      {year:1988,drawdown:-2.80,ret:12.40},{year:1989,drawdown:-1.41,ret:27.25},{year:1990,drawdown:-16.66,ret:-6.56},
+      {year:1991,drawdown:-6.32,ret:26.31},{year:1992,drawdown:-5.92,ret:4.46},{year:1993,drawdown:-2.03,ret:7.06},
+      {year:1994,drawdown:-6.56,ret:-1.54},{year:1995,drawdown:-0.45,ret:34.11},{year:1996,drawdown:-3.03,ret:20.26},
+      {year:1997,drawdown:-1.51,ret:31.01},{year:1998,drawdown:-5.94,ret:26.67},{year:1999,drawdown:-1.93,ret:19.53},
+      {year:2000,drawdown:-14.65,ret:-10.14},{year:2001,drawdown:-28.44,ret:-13.04},{year:2002,drawdown:-33.05,ret:-23.37},
+      {year:2003,drawdown:-10.33,ret:26.38},{year:2004,drawdown:-4.60,ret:8.99},{year:2005,drawdown:-6.25,ret:3.00},
+      {year:2006,drawdown:-2.32,ret:13.62},{year:2007,drawdown:-3.83,ret:3.53},{year:2008,drawdown:-49.53,ret:-38.49},
+      {year:2009,drawdown:-26.18,ret:23.45},{year:2010,drawdown:-9.34,ret:12.78},{year:2011,drawdown:-14.54,ret:-0.00},
+      {year:2012,drawdown:0,ret:13.41},{year:2013,drawdown:0,ret:29.60},{year:2014,drawdown:-5.98,ret:11.39},
+      {year:2015,drawdown:-9.32,ret:-0.73},{year:2016,drawdown:-11.44,ret:9.54},{year:2017,drawdown:0,ret:19.42},
+      {year:2018,drawdown:-12.23,ret:-6.24},{year:2019,drawdown:-2.51,ret:28.88},{year:2020,drawdown:-32.16,ret:16.26},
+      {year:2021,drawdown:-2.49,ret:26.89},{year:2022,drawdown:-26.74,ret:-19.44},{year:2023,drawdown:-1.18,ret:24.23},
+      {year:2024,drawdown:-1.84,ret:23.31},{year:2025,drawdown:-17.79,ret:16.39},{year:2026,drawdown:-5.43,ret:-3.70}
     ];
 
     // ── Nasdaq 100 (1985-2026) ────────────────────────────────────────────────
     const NDX_DATA = [
-      {year:1985,drawdown:-4.44,ret:17.97},{year:1986,drawdown:-17.98,ret:6.89},{year:1987,drawdown:-39.93,ret:10.50},
-      {year:1988,drawdown:-14.64,ret:13.54},{year:1989,drawdown:-10.95,ret:26.17},{year:1990,drawdown:-32.90,ret:-10.41},
-      {year:1991,drawdown:-11.47,ret:64.99},{year:1992,drawdown:-18.53,ret:8.86},{year:1993,drawdown:-14.18,ret:10.58},
-      {year:1994,drawdown:-15.94,ret:1.50},{year:1995,drawdown:-11.85,ret:42.54},{year:1996,drawdown:-14.44,ret:42.54},
-      {year:1997,drawdown:-18.22,ret:20.63},{year:1998,drawdown:-22.99,ret:85.30},{year:1999,drawdown:-12.02,ret:101.95},
-      {year:2000,drawdown:-53.02,ret:-36.84},{year:2001,drawdown:-58.72,ret:-32.65},{year:2002,drawdown:-51.96,ret:-37.58},
-      {year:2003,drawdown:-13.06,ret:49.12},{year:2004,drawdown:-16.04,ret:10.44},{year:2005,drawdown:-12.26,ret:1.49},
-      {year:2006,drawdown:-17.42,ret:6.79},{year:2007,drawdown:-11.47,ret:18.67},{year:2008,drawdown:-49.56,ret:-41.89},
-      {year:2009,drawdown:-18.55,ret:53.54},{year:2010,drawdown:-15.91,ret:19.22},{year:2011,drawdown:-16.11,ret:2.70},
-      {year:2012,drawdown:-11.86,ret:16.82},{year:2013,drawdown:-5.97,ret:34.99},{year:2014,drawdown:-8.23,ret:17.94},
-      {year:2015,drawdown:-14.18,ret:8.43},{year:2016,drawdown:-12.23,ret:5.89},{year:2017,drawdown:-4.90,ret:31.52},
-      {year:2018,drawdown:-22.99,ret:-1.04},{year:2019,drawdown:-11.06,ret:37.96},{year:2020,drawdown:-28.03,ret:47.58},
-      {year:2021,drawdown:-10.93,ret:26.63},{year:2022,drawdown:-35.28,ret:-32.97},{year:2023,drawdown:-10.93,ret:53.81},
-      {year:2024,drawdown:-13.58,ret:24.88},{year:2025,drawdown:-22.93,ret:20.17},{year:2026,drawdown:-8.16,ret:-4.30}
+      {year:1985,drawdown:0,ret:17.97},{year:1986,drawdown:-3.20,ret:6.89},{year:1987,drawdown:-10.72,ret:10.50},
+      {year:1988,drawdown:-3.00,ret:13.54},{year:1989,drawdown:-2.52,ret:26.17},{year:1990,drawdown:-27.38,ret:-10.41},
+      {year:1991,drawdown:-4.80,ret:64.99},{year:1992,drawdown:-13.06,ret:8.86},{year:1993,drawdown:-9.34,ret:10.58},
+      {year:1994,drawdown:-12.11,ret:1.50},{year:1995,drawdown:-2.39,ret:42.54},{year:1996,drawdown:-8.58,ret:42.54},
+      {year:1997,drawdown:-5.14,ret:20.63},{year:1998,drawdown:-5.84,ret:85.30},{year:1999,drawdown:-0.14,ret:101.95},
+      {year:2000,drawdown:-41.35,ret:-36.84},{year:2001,drawdown:-53.50,ret:-32.65},{year:2002,drawdown:-49.57,ret:-37.58},
+      {year:2003,drawdown:-4.66,ret:49.12},{year:2004,drawdown:-11.31,ret:10.44},{year:2005,drawdown:-13.99,ret:1.49},
+      {year:2006,drawdown:-12.06,ret:6.79},{year:2007,drawdown:-2.61,ret:18.67},{year:2008,drawdown:-51.13,ret:-41.89},
+      {year:2009,drawdown:-14.13,ret:53.54},{year:2010,drawdown:-8.62,ret:19.22},{year:2011,drawdown:-8.25,ret:2.70},
+      {year:2012,drawdown:0,ret:16.82},{year:2013,drawdown:0,ret:34.99},{year:2014,drawdown:-4.95,ret:17.94},
+      {year:2015,drawdown:-10.60,ret:8.43},{year:2016,drawdown:-15.34,ret:5.89},{year:2017,drawdown:0,ret:31.52},
+      {year:2018,drawdown:-7.84,ret:-1.04},{year:2019,drawdown:-3.01,ret:37.96},{year:2020,drawdown:-22.46,ret:47.58},
+      {year:2021,drawdown:-5.28,ret:26.63},{year:2022,drawdown:-36.03,ret:-32.97},{year:2023,drawdown:-2.22,ret:53.81},
+      {year:2024,drawdown:-3.43,ret:24.88},{year:2025,drawdown:-21.27,ret:20.17},{year:2026,drawdown:-5.90,ret:-4.30}
     ];
 
     // ── Nasdaq Composite (1971-2026) ──────────────────────────────────────────
     const IXIC_DATA = [
-      {year:1971,drawdown:-10.80,ret:14.12},{year:1972,drawdown:-6.20,ret:17.18},{year:1973,drawdown:-35.20,ret:-31.06},
-      {year:1974,drawdown:-43.16,ret:-35.11},{year:1975,drawdown:-16.16,ret:29.76},{year:1976,drawdown:-5.58,ret:26.10},
-      {year:1977,drawdown:-6.42,ret:7.33},{year:1978,drawdown:-20.37,ret:12.31},{year:1979,drawdown:-12.92,ret:28.11},
-      {year:1980,drawdown:-24.91,ret:33.88},{year:1981,drawdown:-21.68,ret:-3.21},{year:1982,drawdown:-18.61,ret:18.67},
-      {year:1983,drawdown:-18.04,ret:19.87},{year:1984,drawdown:-21.74,ret:-11.31},{year:1985,drawdown:-10.01,ret:31.49},
-      {year:1986,drawdown:-16.42,ret:7.36},{year:1987,drawdown:-35.96,ret:-5.25},{year:1988,drawdown:-7.83,ret:15.40},
-      {year:1989,drawdown:-10.56,ret:19.24},{year:1990,drawdown:-30.71,ret:-17.81},{year:1991,drawdown:-7.48,ret:56.86},
-      {year:1992,drawdown:-15.05,ret:15.45},{year:1993,drawdown:-8.88,ret:14.75},{year:1994,drawdown:-13.70,ret:-3.20},
-      {year:1995,drawdown:-7.86,ret:39.92},{year:1996,drawdown:-16.55,ret:22.71},{year:1997,drawdown:-14.11,ret:21.64},
-      {year:1998,drawdown:-29.55,ret:39.63},{year:1999,drawdown:-13.07,ret:85.59},{year:2000,drawdown:-53.79,ret:-39.29},
-      {year:2001,drawdown:-50.22,ret:-21.05},{year:2002,drawdown:-45.90,ret:-31.53},{year:2003,drawdown:-12.97,ret:50.01},
-      {year:2004,drawdown:-18.63,ret:8.59},{year:2005,drawdown:-11.52,ret:1.37},{year:2006,drawdown:-14.78,ret:9.52},
-      {year:2007,drawdown:-11.13,ret:9.81},{year:2008,drawdown:-49.57,ret:-40.54},{year:2009,drawdown:-23.22,ret:43.89},
-      {year:2010,drawdown:-17.33,ret:16.91},{year:2011,drawdown:-18.71,ret:-1.80},{year:2012,drawdown:-12.01,ret:15.91},
-      {year:2013,drawdown:-5.18,ret:38.32},{year:2014,drawdown:-8.36,ret:13.40},{year:2015,drawdown:-13.65,ret:5.73},
-      {year:2016,drawdown:-12.98,ret:7.50},{year:2017,drawdown:-3.67,ret:28.24},{year:2018,drawdown:-23.64,ret:-3.88},
-      {year:2019,drawdown:-10.18,ret:35.23},{year:2020,drawdown:-30.12,ret:43.64},{year:2021,drawdown:-10.54,ret:21.39},
-      {year:2022,drawdown:-35.49,ret:-33.10},{year:2023,drawdown:-12.27,ret:43.42},{year:2024,drawdown:-13.15,ret:28.64},
-      {year:2025,drawdown:-23.87,ret:20.36},{year:2026,drawdown:-9.26,ret:-5.65}
+      {year:1971,drawdown:0,ret:14.12},{year:1972,drawdown:-0.41,ret:17.18},{year:1973,drawdown:-33.69,ret:-31.06},
+      {year:1974,drawdown:-40.48,ret:-35.11},{year:1975,drawdown:0,ret:29.76},{year:1976,drawdown:0,ret:26.10},
+      {year:1977,drawdown:-4.31,ret:7.33},{year:1978,drawdown:-5.67,ret:12.31},{year:1979,drawdown:-0.12,ret:28.11},
+      {year:1980,drawdown:-17.90,ret:33.88},{year:1981,drawdown:-13.50,ret:-3.21},{year:1982,drawdown:-18.74,ret:18.67},
+      {year:1983,drawdown:-0.78,ret:19.87},{year:1984,drawdown:-19.13,ret:-11.31},{year:1985,drawdown:-0.53,ret:31.49},
+      {year:1986,drawdown:-0.86,ret:7.36},{year:1987,drawdown:-17.29,ret:-5.25},{year:1988,drawdown:-0.45,ret:15.40},
+      {year:1989,drawdown:-1.18,ret:19.24},{year:1990,drawdown:-28.98,ret:-17.81},{year:1991,drawdown:-5.56,ret:56.86},
+      {year:1992,drawdown:-6.89,ret:15.45},{year:1993,drawdown:-4.76,ret:14.75},{year:1994,drawdown:-11.05,ret:-3.20},
+      {year:1995,drawdown:-1.53,ret:39.92},{year:1996,drawdown:-7.07,ret:22.71},{year:1997,drawdown:-7.50,ret:21.64},
+      {year:1998,drawdown:-14.42,ret:39.63},{year:1999,drawdown:0,ret:85.59},{year:2000,drawdown:-43.77,ret:-39.29},
+      {year:2001,drawdown:-43.86,ret:-21.05},{year:2002,drawdown:-43.17,ret:-31.53},{year:2003,drawdown:-6.16,ret:50.01},
+      {year:2004,drawdown:-12.61,ret:8.59},{year:2005,drawdown:-13.13,ret:1.37},{year:2006,drawdown:-8.73,ret:9.52},
+      {year:2007,drawdown:-3.47,ret:9.81},{year:2008,drawdown:-51.16,ret:-40.54},{year:2009,drawdown:-19.75,ret:43.89},
+      {year:2010,drawdown:-9.17,ret:16.91},{year:2011,drawdown:-13.34,ret:-1.80},{year:2012,drawdown:0,ret:15.91},
+      {year:2013,drawdown:0,ret:38.32},{year:2014,drawdown:-5.52,ret:13.40},{year:2015,drawdown:-9.37,ret:5.73},
+      {year:2016,drawdown:-15.93,ret:7.50},{year:2017,drawdown:0,ret:28.24},{year:2018,drawdown:-10.33,ret:-3.88},
+      {year:2019,drawdown:-2.68,ret:35.23},{year:2020,drawdown:-26.09,ret:43.64},{year:2021,drawdown:-3.81,ret:21.39},
+      {year:2022,drawdown:-35.51,ret:-33.10},{year:2023,drawdown:-1.92,ret:43.42},{year:2024,drawdown:-3.56,ret:28.64},
+      {year:2025,drawdown:-23.44,ret:20.36},{year:2026,drawdown:-7.40,ret:-5.65}
     ];
 
     // ── Utilities ─────────────────────────────────────────────────────────────
@@ -1016,12 +1016,10 @@
 
     // ── Live Data Fetching ────────────────────────────────────────────────────
 
-    // YTD peaks — initialized from ATH prices, updated as live data comes in
-    const ytdPeak = {
-      sp500: ATH.sp500.price,
-      ndx:   ATH.ndx.price,
-      ixic:  ATH.ixic.price,
-    };
+    // Previous year closes — populated from live.json (chartPreviousClose with range=ytd)
+    const prevYearClose = { sp500: null, ndx: null, ixic: null };
+    // YTD lows — populated from live.json, updated if current price is lower
+    const ytdLow = { sp500: Infinity, ndx: Infinity, ixic: Infinity };
 
     async function fetchLiveQuotes() {
       // Fetch live.json written by GitHub Action (same-origin, no CORS)
@@ -1049,16 +1047,20 @@
       document.getElementById(key + "-current").textContent = formatPrice(currentPrice);
     }
 
-    function updateCurrentYearTable(key, currentPrice) {
+    function updateCurrentYearTable(key, q) {
       const currentYear = new Date().getFullYear();
 
-      // Update YTD peak
-      if (currentPrice > ytdPeak[key]) {
-        ytdPeak[key] = currentPrice;
-      }
+      // Update previous year close and YTD low from live data
+      if (q.previousClose) prevYearClose[key] = q.previousClose;
+      if (q.ytdLow < ytdLow[key]) ytdLow[key] = q.ytdLow;
+      if (q.price < ytdLow[key]) ytdLow[key] = q.price;
 
-      // Calculate YTD drawdown from YTD peak
-      const ytdDrawdown = ((currentPrice - ytdPeak[key]) / ytdPeak[key]) * 100;
+      // Drawdown: decline from previous year close to YTD low (SlickCharts method)
+      // Capped at 0 if the low never undercuts the previous year close
+      let ytdDrawdown = 0;
+      if (prevYearClose[key] && ytdLow[key] < prevYearClose[key]) {
+        ytdDrawdown = ((ytdLow[key] - prevYearClose[key]) / prevYearClose[key]) * 100;
+      }
 
       // Map key to its data array
       const dataMap = { sp500: SP500_DATA, ndx: NDX_DATA, ixic: IXIC_DATA };
@@ -1067,7 +1069,6 @@
       const entry = arr.find(e => e.year === currentYear);
       if (entry) {
         entry.drawdown = parseFloat(ytdDrawdown.toFixed(2));
-        // ret field remains unchanged (year-to-date return is not updated here)
       } else {
         arr.push({ year: currentYear, drawdown: parseFloat(ytdDrawdown.toFixed(2)), ret: undefined });
       }
@@ -1091,7 +1092,7 @@
             }
 
             updateCardDrawdown(key, q.price);
-            updateCurrentYearTable(key, q.price);
+            updateCurrentYearTable(key, q);
             if (q.marketState) marketState = q.marketState;
 
             // Populate detailed metrics from live data
