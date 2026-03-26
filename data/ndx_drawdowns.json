@@ -1,0 +1,178 @@
+{
+  "index": "Nasdaq 100",
+  "symbol": "^NDX",
+  "ath": {
+    "price": 26119.85,
+    "date": "2025-10-29"
+  },
+  "drawdowns": [
+    {
+      "year": 1985,
+      "drawdown": -4.44
+    },
+    {
+      "year": 1986,
+      "drawdown": -17.98
+    },
+    {
+      "year": 1987,
+      "drawdown": -39.93
+    },
+    {
+      "year": 1988,
+      "drawdown": -14.64
+    },
+    {
+      "year": 1989,
+      "drawdown": -10.95
+    },
+    {
+      "year": 1990,
+      "drawdown": -32.9
+    },
+    {
+      "year": 1991,
+      "drawdown": -11.47
+    },
+    {
+      "year": 1992,
+      "drawdown": -18.53
+    },
+    {
+      "year": 1993,
+      "drawdown": -14.18
+    },
+    {
+      "year": 1994,
+      "drawdown": -15.94
+    },
+    {
+      "year": 1995,
+      "drawdown": -11.85
+    },
+    {
+      "year": 1996,
+      "drawdown": -14.44
+    },
+    {
+      "year": 1997,
+      "drawdown": -18.22
+    },
+    {
+      "year": 1998,
+      "drawdown": -22.99
+    },
+    {
+      "year": 1999,
+      "drawdown": -12.02
+    },
+    {
+      "year": 2000,
+      "drawdown": -53.02
+    },
+    {
+      "year": 2001,
+      "drawdown": -58.72
+    },
+    {
+      "year": 2002,
+      "drawdown": -51.96
+    },
+    {
+      "year": 2003,
+      "drawdown": -13.06
+    },
+    {
+      "year": 2004,
+      "drawdown": -16.04
+    },
+    {
+      "year": 2005,
+      "drawdown": -12.26
+    },
+    {
+      "year": 2006,
+      "drawdown": -17.42
+    },
+    {
+      "year": 2007,
+      "drawdown": -11.47
+    },
+    {
+      "year": 2008,
+      "drawdown": -49.56
+    },
+    {
+      "year": 2009,
+      "drawdown": -18.55
+    },
+    {
+      "year": 2010,
+      "drawdown": -15.91
+    },
+    {
+      "year": 2011,
+      "drawdown": -16.11
+    },
+    {
+      "year": 2012,
+      "drawdown": -11.86
+    },
+    {
+      "year": 2013,
+      "drawdown": -5.97
+    },
+    {
+      "year": 2014,
+      "drawdown": -8.23
+    },
+    {
+      "year": 2015,
+      "drawdown": -14.18
+    },
+    {
+      "year": 2016,
+      "drawdown": -12.23
+    },
+    {
+      "year": 2017,
+      "drawdown": -4.9
+    },
+    {
+      "year": 2018,
+      "drawdown": -22.99
+    },
+    {
+      "year": 2019,
+      "drawdown": -11.06
+    },
+    {
+      "year": 2020,
+      "drawdown": -28.03
+    },
+    {
+      "year": 2021,
+      "drawdown": -10.93
+    },
+    {
+      "year": 2022,
+      "drawdown": -35.28
+    },
+    {
+      "year": 2023,
+      "drawdown": -10.93
+    },
+    {
+      "year": 2024,
+      "drawdown": -13.58
+    },
+    {
+      "year": 2025,
+      "drawdown": -22.93
+    },
+    {
+      "year": 2026,
+      "drawdown": -8.16
+    }
+  ]
+}
