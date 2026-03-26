@@ -428,7 +428,253 @@
   </div><!-- /.container -->
 
   <script>
-    // Data and rendering will be added here
+    // ── Historical ATH values ─────────────────────────────────────────────────
+    const ATH = {
+      sp500: { price: 6978.60,  date: "2026-01-27" },
+      ndx:   { price: 26119.85, date: "2025-10-29" },
+      ixic:  { price: 23958.47, date: "2025-10-29" },
+    };
+
+    // ── S&P 500 (1928-2026) ───────────────────────────────────────────────────
+    const SP500_DATA = [
+      {year:1928,drawdown:-10.27},{year:1929,drawdown:-44.57},{year:1930,drawdown:-44.29},
+      {year:1931,drawdown:-57.51},{year:1932,drawdown:-51.0},{year:1933,drawdown:-29.43},
+      {year:1934,drawdown:-29.27},{year:1935,drawdown:-15.87},{year:1936,drawdown:-12.77},
+      {year:1937,drawdown:-45.53},{year:1938,drawdown:-28.87},{year:1939,drawdown:-21.24},
+      {year:1940,drawdown:-29.6},{year:1941,drawdown:-22.93},{year:1942,drawdown:-17.82},
+      {year:1943,drawdown:-13.05},{year:1944,drawdown:-6.93},{year:1945,drawdown:-6.88},
+      {year:1946,drawdown:-26.65},{year:1947,drawdown:-14.68},{year:1948,drawdown:-13.54},
+      {year:1949,drawdown:-13.2},{year:1950,drawdown:-14.02},{year:1951,drawdown:-8.11},
+      {year:1952,drawdown:-6.85},{year:1953,drawdown:-14.82},{year:1954,drawdown:-4.42},
+      {year:1955,drawdown:-10.59},{year:1956,drawdown:-10.6},{year:1957,drawdown:-20.66},
+      {year:1958,drawdown:-4.36},{year:1959,drawdown:-9.17},{year:1960,drawdown:-13.56},
+      {year:1961,drawdown:-6.23},{year:1962,drawdown:-26.44},{year:1963,drawdown:-6.54},
+      {year:1964,drawdown:-3.55},{year:1965,drawdown:-9.6},{year:1966,drawdown:-22.18},
+      {year:1967,drawdown:-6.61},{year:1968,drawdown:-9.31},{year:1969,drawdown:-15.98},
+      {year:1970,drawdown:-25.86},{year:1971,drawdown:-13.94},{year:1972,drawdown:-5.14},
+      {year:1973,drawdown:-23.35},{year:1974,drawdown:-37.6},{year:1975,drawdown:-14.14},
+      {year:1976,drawdown:-8.37},{year:1977,drawdown:-15.22},{year:1978,drawdown:-13.55},
+      {year:1979,drawdown:-10.25},{year:1980,drawdown:-17.07},{year:1981,drawdown:-18.35},
+      {year:1982,drawdown:-16.56},{year:1983,drawdown:-6.91},{year:1984,drawdown:-12.68},
+      {year:1985,drawdown:-7.66},{year:1986,drawdown:-9.42},{year:1987,drawdown:-33.51},
+      {year:1988,drawdown:-7.64},{year:1989,drawdown:-7.56},{year:1990,drawdown:-19.92},
+      {year:1991,drawdown:-5.6},{year:1992,drawdown:-6.24},{year:1993,drawdown:-4.99},
+      {year:1994,drawdown:-8.94},{year:1995,drawdown:-2.53},{year:1996,drawdown:-7.64},
+      {year:1997,drawdown:-10.8},{year:1998,drawdown:-19.34},{year:1999,drawdown:-12.08},
+      {year:2000,drawdown:-17.2},{year:2001,drawdown:-29.7},{year:2002,drawdown:-33.75},
+      {year:2003,drawdown:-14.05},{year:2004,drawdown:-8.16},{year:2005,drawdown:-7.17},
+      {year:2006,drawdown:-7.7},{year:2007,drawdown:-10.09},{year:2008,drawdown:-48.01},
+      {year:2009,drawdown:-27.62},{year:2010,drawdown:-15.99},{year:2011,drawdown:-19.39},
+      {year:2012,drawdown:-9.94},{year:2013,drawdown:-5.76},{year:2014,drawdown:-7.4},
+      {year:2015,drawdown:-12.35},{year:2016,drawdown:-9.3},{year:2017,drawdown:-2.8},
+      {year:2018,drawdown:-19.78},{year:2019,drawdown:-6.84},{year:2020,drawdown:-33.92},
+      {year:2021,drawdown:-5.21},{year:2022,drawdown:-25.43},{year:2023,drawdown:-10.28},
+      {year:2024,drawdown:-8.49},{year:2025,drawdown:-18.9},{year:2026,drawdown:-6.77}
+    ];
+
+    // ── Nasdaq 100 (1985-2026) ────────────────────────────────────────────────
+    const NDX_DATA = [
+      {year:1985,drawdown:-4.44},{year:1986,drawdown:-17.98},{year:1987,drawdown:-39.93},
+      {year:1988,drawdown:-14.64},{year:1989,drawdown:-10.95},{year:1990,drawdown:-32.9},
+      {year:1991,drawdown:-11.47},{year:1992,drawdown:-18.53},{year:1993,drawdown:-14.18},
+      {year:1994,drawdown:-15.94},{year:1995,drawdown:-11.85},{year:1996,drawdown:-14.44},
+      {year:1997,drawdown:-18.22},{year:1998,drawdown:-22.99},{year:1999,drawdown:-12.02},
+      {year:2000,drawdown:-53.02},{year:2001,drawdown:-58.72},{year:2002,drawdown:-51.96},
+      {year:2003,drawdown:-13.06},{year:2004,drawdown:-16.04},{year:2005,drawdown:-12.26},
+      {year:2006,drawdown:-17.42},{year:2007,drawdown:-11.47},{year:2008,drawdown:-49.56},
+      {year:2009,drawdown:-18.55},{year:2010,drawdown:-15.91},{year:2011,drawdown:-16.11},
+      {year:2012,drawdown:-11.86},{year:2013,drawdown:-5.97},{year:2014,drawdown:-8.23},
+      {year:2015,drawdown:-14.18},{year:2016,drawdown:-12.23},{year:2017,drawdown:-4.9},
+      {year:2018,drawdown:-22.99},{year:2019,drawdown:-11.06},{year:2020,drawdown:-28.03},
+      {year:2021,drawdown:-10.93},{year:2022,drawdown:-35.28},{year:2023,drawdown:-10.93},
+      {year:2024,drawdown:-13.58},{year:2025,drawdown:-22.93},{year:2026,drawdown:-8.16}
+    ];
+
+    // ── Nasdaq Composite (1971-2026) ──────────────────────────────────────────
+    const IXIC_DATA = [
+      {year:1971,drawdown:-10.8},{year:1972,drawdown:-6.2},{year:1973,drawdown:-35.2},
+      {year:1974,drawdown:-43.16},{year:1975,drawdown:-16.16},{year:1976,drawdown:-5.58},
+      {year:1977,drawdown:-6.42},{year:1978,drawdown:-20.37},{year:1979,drawdown:-12.92},
+      {year:1980,drawdown:-24.91},{year:1981,drawdown:-21.68},{year:1982,drawdown:-18.61},
+      {year:1983,drawdown:-18.04},{year:1984,drawdown:-21.74},{year:1985,drawdown:-10.01},
+      {year:1986,drawdown:-16.42},{year:1987,drawdown:-35.96},{year:1988,drawdown:-7.83},
+      {year:1989,drawdown:-10.56},{year:1990,drawdown:-30.71},{year:1991,drawdown:-7.48},
+      {year:1992,drawdown:-15.05},{year:1993,drawdown:-8.88},{year:1994,drawdown:-13.7},
+      {year:1995,drawdown:-7.86},{year:1996,drawdown:-16.55},{year:1997,drawdown:-14.11},
+      {year:1998,drawdown:-29.55},{year:1999,drawdown:-13.07},{year:2000,drawdown:-53.79},
+      {year:2001,drawdown:-50.22},{year:2002,drawdown:-45.9},{year:2003,drawdown:-12.97},
+      {year:2004,drawdown:-18.63},{year:2005,drawdown:-11.52},{year:2006,drawdown:-14.78},
+      {year:2007,drawdown:-11.13},{year:2008,drawdown:-49.57},{year:2009,drawdown:-23.22},
+      {year:2010,drawdown:-17.33},{year:2011,drawdown:-18.71},{year:2012,drawdown:-12.01},
+      {year:2013,drawdown:-5.18},{year:2014,drawdown:-8.36},{year:2015,drawdown:-13.65},
+      {year:2016,drawdown:-12.98},{year:2017,drawdown:-3.67},{year:2018,drawdown:-23.64},
+      {year:2019,drawdown:-10.18},{year:2020,drawdown:-30.12},{year:2021,drawdown:-10.54},
+      {year:2022,drawdown:-35.49},{year:2023,drawdown:-12.27},{year:2024,drawdown:-13.15},
+      {year:2025,drawdown:-23.87},{year:2026,drawdown:-9.26}
+    ];
+
+    // ── Utilities ─────────────────────────────────────────────────────────────
+
+    /** Build a Map<year, drawdown> from an array for O(1) lookup. */
+    function buildYearMap(data) {
+      const m = new Map();
+      for (const entry of data) m.set(entry.year, entry.drawdown);
+      return m;
+    }
+
+    /** Return the CSS severity class for a drawdown magnitude. */
+    function severityClass(drawdown) {
+      const abs = Math.abs(drawdown);
+      if (abs >= 20) return "severity-severe";
+      if (abs >= 14) return "severity-high";
+      if (abs >= 10) return "severity-moderate";
+      return "severity-mild";
+    }
+
+    /**
+     * Append a bar + percentage cell pair to a row.
+     * @param {HTMLTableRowElement} tr
+     * @param {number|null}         drawdown  null means no data (pre-inception)
+     * @param {string}              colorClass  "sp500" | "ndx" | "ixic"
+     */
+    function appendIndexCells(tr, drawdown, colorClass) {
+      if (drawdown === null) {
+        // No data — single cell spanning both columns
+        const td = document.createElement("td");
+        td.colSpan = 2;
+        td.className = "dash-cell";
+        td.textContent = "\u2014"; // em dash
+        tr.appendChild(td);
+        return;
+      }
+
+      const barWidth = Math.min(Math.abs(drawdown) / 50 * 100, 100);
+
+      // Bar cell
+      const barTd = document.createElement("td");
+      barTd.className = "index-cell";
+
+      const barTrack = document.createElement("div");
+      barTrack.className = "bar-track";
+
+      const barFill = document.createElement("div");
+      barFill.className = "bar-fill " + colorClass;
+      barFill.style.width = barWidth + "%";
+
+      barTrack.appendChild(barFill);
+      barTd.appendChild(barTrack);
+      tr.appendChild(barTd);
+
+      // Percentage cell
+      const pctTd = document.createElement("td");
+      const pctSpan = document.createElement("span");
+      pctSpan.className = "pct-text " + severityClass(drawdown);
+      pctSpan.textContent = drawdown.toFixed(2) + "%";
+      pctTd.appendChild(pctSpan);
+      tr.appendChild(pctTd);
+    }
+
+    // ── Table Rendering ───────────────────────────────────────────────────────
+
+    function renderTable() {
+      const sp500Map = buildYearMap(SP500_DATA);
+      const ndxMap   = buildYearMap(NDX_DATA);
+      const ixicMap  = buildYearMap(IXIC_DATA);
+
+      // Collect every unique year across all datasets
+      const yearSet = new Set();
+      for (const d of SP500_DATA) yearSet.add(d.year);
+      for (const d of NDX_DATA)   yearSet.add(d.year);
+      for (const d of IXIC_DATA)  yearSet.add(d.year);
+
+      const currentYear = new Date().getFullYear();
+
+      // Build rows with worst-drawdown sort key
+      const rows = [];
+      for (const year of yearSet) {
+        const sp   = sp500Map.has(year) ? sp500Map.get(year) : null;
+        const ndx  = ndxMap.has(year)   ? ndxMap.get(year)   : null;
+        const ixic = ixicMap.has(year)  ? ixicMap.get(year)  : null;
+
+        // Worst = most negative value across available indices
+        const values = [sp, ndx, ixic].filter(v => v !== null);
+        const worst  = values.length > 0 ? Math.min(...values) : 0;
+
+        rows.push({ year, sp, ndx, ixic, worst });
+      }
+
+      // Sort: worst (most negative) first
+      rows.sort((a, b) => a.worst - b.worst);
+
+      const tbody = document.getElementById("table-body");
+      tbody.textContent = ""; // clear without innerHTML
+
+      rows.forEach((row, idx) => {
+        const tr = document.createElement("tr");
+        if (row.year === currentYear) tr.classList.add("current-year");
+
+        // Rank cell
+        const rankTd = document.createElement("td");
+        rankTd.className = "rank";
+        rankTd.textContent = String(idx + 1);
+        tr.appendChild(rankTd);
+
+        // Year cell
+        const yearTd = document.createElement("td");
+        yearTd.className = "year-cell";
+        yearTd.textContent = String(row.year);
+        tr.appendChild(yearTd);
+
+        // Three index pairs
+        appendIndexCells(tr, row.sp,  "sp500");
+        appendIndexCells(tr, row.ndx, "ndx");
+        appendIndexCells(tr, row.ixic,"ixic");
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ── Card population (static ATH data; live data added later) ─────────────
+
+    function formatPrice(price) {
+      return price.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+    }
+
+    function formatDate(isoStr) {
+      const [y, m, d] = isoStr.split("-").map(Number);
+      return new Date(y, m - 1, d).toLocaleDateString("en-US", {
+        year: "numeric", month: "short", day: "numeric"
+      });
+    }
+
+    function populateCards() {
+      const indices = [
+        { key: "sp500", prefix: "sp500" },
+        { key: "ndx",   prefix: "ndx"   },
+        { key: "ixic",  prefix: "ixic"  },
+      ];
+
+      for (const { key, prefix } of indices) {
+        const ath = ATH[key];
+        document.getElementById(prefix + "-ath-price").textContent = formatPrice(ath.price);
+        document.getElementById(prefix + "-ath-date").textContent  = formatDate(ath.date);
+        // Current price and live drawdown remain "Loading…" until live fetch task
+      }
+    }
+
+    // ── Init ──────────────────────────────────────────────────────────────────
+
+    document.addEventListener("DOMContentLoaded", function () {
+      populateCards();
+      renderTable();
+      document.getElementById("status-text").textContent =
+        "Historical data loaded. Live prices loading\u2026";
+    });
   </script>
 </body>
 </html>
