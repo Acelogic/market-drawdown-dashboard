@@ -193,7 +193,8 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 680px;
+      min-width: 900px;
+      table-layout: fixed;
     }
 
     thead th {
@@ -249,8 +250,8 @@
       width: 56px;
     }
 
-    td.index-cell {
-      min-width: 120px;
+    td.bar-cell {
+      padding-right: 0;
     }
 
     td.dash-cell {
@@ -259,20 +260,12 @@
       font-size: 15px;
     }
 
-    /* Bar + pct wrapper */
-    .bar-pct {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
     .bar-track {
-      flex: 1;
       height: 10px;
       background-color: #f0f0e0;
       border-radius: 5px;
       overflow: hidden;
-      min-width: 60px;
+      width: 100%;
     }
 
     .bar-fill {
@@ -285,12 +278,20 @@
     .bar-fill.ndx   { background-color: #3498db; }
     .bar-fill.ixic  { background-color: #9b59b6; }
 
+    td.dd-cell {
+      text-align: right;
+      padding-left: 2px;
+    }
+
+    td.ret-cell {
+      text-align: right;
+      padding-left: 2px;
+    }
+
     .pct-text {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       white-space: nowrap;
-      min-width: 52px;
-      text-align: right;
     }
 
     /* Severity color classes */
@@ -303,12 +304,19 @@
     .ret-positive { color: #27ae60; }
     .ret-negative { color: #e74c3c; }
 
-    /* Return text next to drawdown pct */
     .ret-text {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
       white-space: nowrap;
-      margin-left: 4px;
+    }
+
+    .sub-header {
+      font-size: 10px;
+      font-weight: 600;
+      color: #999;
+      text-transform: uppercase;
+      padding: 2px 10px 6px;
+      border-bottom: 2px solid #e8e8d8;
     }
 
     /* ── Color Key ── */
@@ -471,7 +479,7 @@
       }
 
       table {
-        min-width: 820px;
+        min-width: 900px;
       }
 
       thead th {
@@ -486,7 +494,6 @@
 
       .pct-text {
         font-size: 11px;
-        min-width: 44px;
       }
 
       .ret-text {
@@ -494,7 +501,6 @@
       }
 
       .bar-track {
-        min-width: 40px;
         height: 8px;
       }
 
@@ -686,13 +692,37 @@
 
       <div class="table-wrapper">
         <table id="drawdown-table">
+          <colgroup>
+            <col style="width:32px"><!-- # -->
+            <col style="width:48px"><!-- Year -->
+            <col><!-- SP500 bar -->
+            <col style="width:62px"><!-- SP500 dd% -->
+            <col style="width:58px"><!-- SP500 ret% -->
+            <col><!-- NDX bar -->
+            <col style="width:62px"><!-- NDX dd% -->
+            <col style="width:58px"><!-- NDX ret% -->
+            <col><!-- IXIC bar -->
+            <col style="width:62px"><!-- IXIC dd% -->
+            <col style="width:58px"><!-- IXIC ret% -->
+          </colgroup>
           <thead>
             <tr>
-              <th class="center">#</th>
-              <th>Year</th>
+              <th class="center" rowspan="2">#</th>
+              <th rowspan="2">Year</th>
               <th colspan="3">S&amp;P 500</th>
               <th colspan="3">Nasdaq 100</th>
               <th colspan="3">Nasdaq Composite</th>
+            </tr>
+            <tr>
+              <th class="sub-header"></th>
+              <th class="sub-header">DD%</th>
+              <th class="sub-header">Ret%</th>
+              <th class="sub-header"></th>
+              <th class="sub-header">DD%</th>
+              <th class="sub-header">Ret%</th>
+              <th class="sub-header"></th>
+              <th class="sub-header">DD%</th>
+              <th class="sub-header">Ret%</th>
             </tr>
           </thead>
           <tbody id="table-body">
@@ -833,35 +863,34 @@
         return;
       }
 
-      const barWidth = Math.min(Math.abs(drawdown) / 50 * 100, 100);
+      var barWidth = Math.min(Math.abs(drawdown) / 50 * 100, 100);
 
       // Bar cell
-      const barTd = document.createElement("td");
-      barTd.className = "index-cell";
-
-      const barTrack = document.createElement("div");
+      var barTd = document.createElement("td");
+      barTd.className = "bar-cell";
+      var barTrack = document.createElement("div");
       barTrack.className = "bar-track";
-
-      const barFill = document.createElement("div");
+      var barFill = document.createElement("div");
       barFill.className = "bar-fill " + colorClass;
       barFill.style.width = barWidth + "%";
-
       barTrack.appendChild(barFill);
       barTd.appendChild(barTrack);
       tr.appendChild(barTd);
 
-      // Drawdown percentage cell
-      const pctTd = document.createElement("td");
-      const pctSpan = document.createElement("span");
+      // Drawdown % cell
+      var ddTd = document.createElement("td");
+      ddTd.className = "dd-cell";
+      var pctSpan = document.createElement("span");
       pctSpan.className = "pct-text " + severityClass(drawdown);
-      pctSpan.textContent = drawdown.toFixed(2) + "%";
-      pctTd.appendChild(pctSpan);
-      tr.appendChild(pctTd);
+      pctSpan.textContent = drawdown.toFixed(1) + "%";
+      ddTd.appendChild(pctSpan);
+      tr.appendChild(ddTd);
 
-      // Return percentage cell
-      const retTd = document.createElement("td");
+      // Return % cell
+      var retTd = document.createElement("td");
+      retTd.className = "ret-cell";
       if (ret !== undefined && ret !== null) {
-        const retSpan = document.createElement("span");
+        var retSpan = document.createElement("span");
         retSpan.className = "ret-text " + (ret >= 0 ? "ret-positive" : "ret-negative");
         retSpan.textContent = (ret >= 0 ? "+" : "") + ret.toFixed(1) + "%";
         retTd.appendChild(retSpan);
