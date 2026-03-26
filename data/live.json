@@ -1,0 +1,20 @@
+{
+  "quotes": {
+    "sp500": {
+      "price": 6477.16,
+      "previousClose": 6591.9,
+      "marketState": "UNKNOWN"
+    },
+    "ndx": {
+      "price": 23586.994,
+      "previousClose": 24162.977,
+      "marketState": "UNKNOWN"
+    },
+    "ixic": {
+      "price": 21408.08,
+      "previousClose": 21929.826,
+      "marketState": "UNKNOWN"
+    }
+  },
+  "timestamp": "2026-03-26T20:40:05.654870+00:00"
+}

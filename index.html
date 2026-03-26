@@ -677,12 +677,6 @@
 
     // ── Live Data Fetching ────────────────────────────────────────────────────
 
-    const SYMBOLS = {
-      sp500: "^GSPC",
-      ndx:   "^NDX",
-      ixic:  "^IXIC",
-    };
-
     // YTD peaks — initialized from ATH prices, updated as live data comes in
     const ytdPeak = {
       sp500: ATH.sp500.price,
@@ -690,38 +684,12 @@
       ixic:  ATH.ixic.price,
     };
 
-    async function fetchQuote(symbol) {
-      const yahooUrl = "https://query1.finance.yahoo.com/v8/finance/chart/" +
-                       encodeURIComponent(symbol) + "?range=1d&interval=5m";
-      const url = "https://api.allorigins.win/get?url=" + encodeURIComponent(yahooUrl);
-      const resp = await fetch(url);
-      if (!resp.ok) throw new Error("HTTP " + resp.status + " for " + symbol);
-      const wrapper = await resp.json();
-      var data = JSON.parse(wrapper.contents);
-      const meta = data.chart.result[0].meta;
-      return {
-        price:       meta.regularMarketPrice,
-        marketState: meta.marketState,
-      };
-    }
-
-    function updateStatusLine(success, marketState) {
-      const dot  = document.querySelector(".pulse-dot");
-      const text = document.getElementById("status-text");
-
-      if (success) {
-        dot.className = "pulse-dot live-dot";
-        const now = new Date().toLocaleTimeString("en-US", {
-          hour: "2-digit", minute: "2-digit", second: "2-digit"
-        });
-        const stateLabel = marketState ? marketState.charAt(0) + marketState.slice(1).toLowerCase() : "";
-        text.textContent =
-          (stateLabel ? stateLabel + " market \u00b7 " : "") +
-          "Last updated " + now + " \u00b7 Auto-refreshes every 60s";
-      } else {
-        dot.className = "pulse-dot live-dot error-dot";
-        text.textContent = "Live data unavailable \u2014 Showing historical data only";
-      }
+    async function fetchLiveQuotes() {
+      // Fetch live.json written by GitHub Action (same-origin, no CORS)
+      var resp = await fetch("data/live.json?t=" + Date.now());
+      if (!resp.ok) throw new Error("HTTP " + resp.status);
+      var data = await resp.json();
+      return data;
     }
 
     function updateCardDrawdown(key, currentPrice) {
@@ -766,27 +734,40 @@
     }
 
     async function refreshLiveData() {
-      const keys = ["sp500", "ndx", "ixic"];
-      let anySuccess = false;
-      let lastMarketState = null;
+      try {
+        var data = await fetchLiveQuotes();
+        var quotes = data.quotes;
+        var marketState = null;
 
-      await Promise.all(keys.map(async (key) => {
-        try {
-          const { price, marketState } = await fetchQuote(SYMBOLS[key]);
-          anySuccess = true;
-          lastMarketState = marketState;
-          updateCardDrawdown(key, price);
-          updateCurrentYearTable(key, price);
-        } catch (err) {
-          console.warn("Failed to fetch live data for", SYMBOLS[key], err);
+        var keys = ["sp500", "ndx", "ixic"];
+        for (var i = 0; i < keys.length; i++) {
+          var key = keys[i];
+          if (quotes[key]) {
+            updateCardDrawdown(key, quotes[key].price);
+            updateCurrentYearTable(key, quotes[key].price);
+            if (quotes[key].marketState) marketState = quotes[key].marketState;
+          }
         }
-      }));
 
-      if (anySuccess) {
         renderTable();
-        updateStatusLine(true, lastMarketState);
-      } else {
-        updateStatusLine(false, null);
+
+        // Show when the data was fetched by the GitHub Action
+        var ts = new Date(data.timestamp);
+        var age = Math.round((Date.now() - ts.getTime()) / 60000);
+        var ageLabel = age < 1 ? "just now" : age + "m ago";
+        var dot = document.querySelector(".pulse-dot");
+        var text = document.getElementById("status-text");
+        dot.className = "pulse-dot live-dot";
+        var stateLabel = marketState ? marketState.charAt(0) + marketState.slice(1).toLowerCase() : "";
+        text.textContent =
+          (stateLabel ? stateLabel + " \u00b7 " : "") +
+          "Prices from " + ageLabel + " \u00b7 Auto-refreshes every 60s";
+      } catch (err) {
+        console.warn("Failed to fetch live data:", err);
+        var dot = document.querySelector(".pulse-dot");
+        var text = document.getElementById("status-text");
+        dot.className = "pulse-dot live-dot error-dot";
+        text.textContent = "Live data unavailable \u2014 Showing historical data only";
       }
     }
 
