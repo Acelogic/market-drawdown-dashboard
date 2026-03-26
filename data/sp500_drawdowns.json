@@ -8,497 +8,497 @@
   "drawdowns": [
     {
       "year": 1928,
-      "drawdown": -10.27,
-      "return": 37.11
+      "drawdown": -4.02,
+      "return": 37.88
     },
     {
       "year": 1929,
-      "drawdown": -44.57,
+      "drawdown": -27.47,
       "return": -11.91
     },
     {
       "year": 1930,
-      "drawdown": -44.29,
+      "drawdown": -32.68,
       "return": -28.48
     },
     {
       "year": 1931,
-      "drawdown": -57.51,
+      "drawdown": -49.67,
       "return": -47.07
     },
     {
       "year": 1932,
-      "drawdown": -51.0,
+      "drawdown": -45.81,
       "return": -14.78
     },
     {
       "year": 1933,
-      "drawdown": -29.43,
+      "drawdown": -20.09,
       "return": 44.08
     },
     {
       "year": 1934,
-      "drawdown": -29.27,
+      "drawdown": -16.15,
       "return": -4.71
     },
     {
       "year": 1935,
-      "drawdown": -15.87,
+      "drawdown": -15.16,
       "return": 41.37
     },
     {
       "year": 1936,
-      "drawdown": -12.77,
+      "drawdown": -0.22,
       "return": 27.92
     },
     {
       "year": 1937,
-      "drawdown": -45.53,
+      "drawdown": -40.8,
       "return": -38.59
     },
     {
       "year": 1938,
-      "drawdown": -28.87,
+      "drawdown": -19.43,
       "return": 24.55
     },
     {
       "year": 1939,
-      "drawdown": -21.24,
+      "drawdown": -20.7,
       "return": -5.18
     },
     {
       "year": 1940,
-      "drawdown": -29.6,
+      "drawdown": -27.85,
       "return": -15.09
     },
     {
       "year": 1941,
-      "drawdown": -22.93,
+      "drawdown": -20.89,
       "return": -17.86
     },
     {
       "year": 1942,
-      "drawdown": -17.82,
+      "drawdown": -14.04,
       "return": 12.43
     },
     {
       "year": 1943,
-      "drawdown": -13.05,
+      "drawdown": 0.0,
       "return": 19.45
     },
     {
       "year": 1944,
-      "drawdown": -6.93,
+      "drawdown": -0.94,
       "return": 13.8
     },
     {
       "year": 1945,
-      "drawdown": -6.88,
+      "drawdown": -0.53,
       "return": 30.72
     },
     {
       "year": 1946,
-      "drawdown": -26.65,
+      "drawdown": -18.66,
       "return": -11.87
     },
     {
       "year": 1947,
-      "drawdown": -14.68,
+      "drawdown": -10.0,
       "return": 0.0
     },
     {
       "year": 1948,
-      "drawdown": -13.54,
+      "drawdown": -9.54,
       "return": -0.65
     },
     {
       "year": 1949,
-      "drawdown": -13.2,
+      "drawdown": -10.86,
       "return": 10.46
     },
     {
       "year": 1950,
-      "drawdown": -14.02,
+      "drawdown": -0.77,
       "return": 21.68
     },
     {
       "year": 1951,
-      "drawdown": -8.11,
+      "drawdown": 0.0,
       "return": 16.35
     },
     {
       "year": 1952,
-      "drawdown": -6.85,
+      "drawdown": -2.86,
       "return": 11.78
     },
     {
       "year": 1953,
-      "drawdown": -14.82,
+      "drawdown": -14.53,
       "return": -6.62
     },
     {
       "year": 1954,
-      "drawdown": -4.42,
+      "drawdown": -0.04,
       "return": 45.02
     },
     {
       "year": 1955,
-      "drawdown": -10.59,
+      "drawdown": -3.89,
       "return": 26.4
     },
     {
       "year": 1956,
-      "drawdown": -10.6,
+      "drawdown": -5.21,
       "return": 2.62
     },
     {
       "year": 1957,
-      "drawdown": -20.66,
+      "drawdown": -16.48,
       "return": -14.31
     },
     {
       "year": 1958,
-      "drawdown": -4.36,
+      "drawdown": 0.0,
       "return": 38.06
     },
     {
       "year": 1959,
-      "drawdown": -9.17,
+      "drawdown": -2.95,
       "return": 8.48
     },
     {
       "year": 1960,
-      "drawdown": -13.56,
+      "drawdown": -12.84,
       "return": -2.97
     },
     {
       "year": 1961,
-      "drawdown": -6.23,
+      "drawdown": -0.93,
       "return": 23.13
     },
     {
       "year": 1962,
-      "drawdown": -26.44,
+      "drawdown": -28.23,
       "return": -11.81
     },
     {
       "year": 1963,
-      "drawdown": -6.54,
+      "drawdown": -1.24,
       "return": 18.89
     },
     {
       "year": 1964,
-      "drawdown": -3.55,
+      "drawdown": -0.27,
       "return": 12.97
     },
     {
       "year": 1965,
-      "drawdown": -9.6,
+      "drawdown": -4.74,
       "return": 9.06
     },
     {
       "year": 1966,
-      "drawdown": -22.18,
+      "drawdown": -21.8,
       "return": -13.09
     },
     {
       "year": 1967,
-      "drawdown": -6.61,
+      "drawdown": -1.12,
       "return": 20.09
     },
     {
       "year": 1968,
-      "drawdown": -9.31,
+      "drawdown": -10.1,
       "return": 7.66
     },
     {
       "year": 1969,
-      "drawdown": -15.98,
+      "drawdown": -15.23,
       "return": -11.36
     },
     {
       "year": 1970,
-      "drawdown": -25.86,
+      "drawdown": -25.47,
       "return": 0.1
     },
     {
       "year": 1971,
-      "drawdown": -13.94,
+      "drawdown": -3.05,
       "return": 10.79
     },
     {
       "year": 1972,
-      "drawdown": -5.14,
+      "drawdown": -1.2,
       "return": 15.63
     },
     {
       "year": 1973,
-      "drawdown": -23.35,
+      "drawdown": -22.87,
       "return": -17.37
     },
     {
       "year": 1974,
-      "drawdown": -37.6,
+      "drawdown": -37.51,
       "return": -29.72
     },
     {
       "year": 1975,
-      "drawdown": -14.14,
+      "drawdown": 0.0,
       "return": 31.55
     },
     {
       "year": 1976,
-      "drawdown": -8.37,
+      "drawdown": -0.42,
       "return": 19.15
     },
     {
       "year": 1977,
-      "drawdown": -15.22,
+      "drawdown": -16.24,
       "return": -11.5
     },
     {
       "year": 1978,
-      "drawdown": -13.55,
+      "drawdown": -9.1,
       "return": 1.06
     },
     {
       "year": 1979,
-      "drawdown": -10.25,
+      "drawdown": -0.93,
       "return": 12.31
     },
     {
       "year": 1980,
-      "drawdown": -17.07,
+      "drawdown": -12.7,
       "return": 25.77
     },
     {
       "year": 1981,
-      "drawdown": -18.35,
+      "drawdown": -18.83,
       "return": -9.73
     },
     {
       "year": 1982,
-      "drawdown": -16.56,
+      "drawdown": -16.61,
       "return": 14.76
     },
     {
       "year": 1983,
-      "drawdown": -6.91,
+      "drawdown": -1.82,
       "return": 17.27
     },
     {
       "year": 1984,
-      "drawdown": -12.68,
+      "drawdown": -10.71,
       "return": 1.4
     },
     {
       "year": 1985,
-      "drawdown": -7.66,
+      "drawdown": -2.32,
       "return": 26.33
     },
     {
       "year": 1986,
-      "drawdown": -9.42,
+      "drawdown": -4.11,
       "return": 14.62
     },
     {
       "year": 1987,
-      "drawdown": -33.51,
+      "drawdown": -10.62,
       "return": 2.03
     },
     {
       "year": 1988,
-      "drawdown": -7.64,
+      "drawdown": -2.8,
       "return": 12.4
     },
     {
       "year": 1989,
-      "drawdown": -7.56,
+      "drawdown": -1.41,
       "return": 27.25
     },
     {
       "year": 1990,
-      "drawdown": -19.92,
+      "drawdown": -16.66,
       "return": -6.56
     },
     {
       "year": 1991,
-      "drawdown": -5.6,
+      "drawdown": -6.32,
       "return": 26.31
     },
     {
       "year": 1992,
-      "drawdown": -6.24,
+      "drawdown": -5.92,
       "return": 4.46
     },
     {
       "year": 1993,
-      "drawdown": -4.99,
+      "drawdown": -2.03,
       "return": 7.06
     },
     {
       "year": 1994,
-      "drawdown": -8.94,
+      "drawdown": -6.56,
       "return": -1.54
     },
     {
       "year": 1995,
-      "drawdown": -2.53,
+      "drawdown": -0.45,
       "return": 34.11
     },
     {
       "year": 1996,
-      "drawdown": -7.64,
+      "drawdown": -3.03,
       "return": 20.26
     },
     {
       "year": 1997,
-      "drawdown": -10.8,
+      "drawdown": -1.51,
       "return": 31.01
     },
     {
       "year": 1998,
-      "drawdown": -19.34,
+      "drawdown": -5.94,
       "return": 26.67
     },
     {
       "year": 1999,
-      "drawdown": -12.08,
+      "drawdown": -1.93,
       "return": 19.53
     },
     {
       "year": 2000,
-      "drawdown": -17.2,
+      "drawdown": -14.65,
       "return": -10.14
     },
     {
       "year": 2001,
-      "drawdown": -29.7,
+      "drawdown": -28.44,
       "return": -13.04
     },
     {
       "year": 2002,
-      "drawdown": -33.75,
+      "drawdown": -33.05,
       "return": -23.37
     },
     {
       "year": 2003,
-      "drawdown": -14.05,
+      "drawdown": -10.33,
       "return": 26.38
     },
     {
       "year": 2004,
-      "drawdown": -8.16,
+      "drawdown": -4.6,
       "return": 8.99
     },
     {
       "year": 2005,
-      "drawdown": -7.17,
+      "drawdown": -6.25,
       "return": 3.0
     },
     {
       "year": 2006,
-      "drawdown": -7.7,
+      "drawdown": -2.32,
       "return": 13.62
     },
     {
       "year": 2007,
-      "drawdown": -10.09,
+      "drawdown": -3.83,
       "return": 3.53
     },
     {
       "year": 2008,
-      "drawdown": -48.01,
+      "drawdown": -49.53,
       "return": -38.49
     },
     {
       "year": 2009,
-      "drawdown": -27.62,
+      "drawdown": -26.18,
       "return": 23.45
     },
     {
       "year": 2010,
-      "drawdown": -15.99,
+      "drawdown": -9.34,
       "return": 12.78
     },
     {
       "year": 2011,
-      "drawdown": -19.39,
+      "drawdown": -14.54,
       "return": -0.0
     },
     {
       "year": 2012,
-      "drawdown": -9.94,
+      "drawdown": 0.0,
       "return": 13.41
     },
     {
       "year": 2013,
-      "drawdown": -5.76,
+      "drawdown": 0.0,
       "return": 29.6
     },
     {
       "year": 2014,
-      "drawdown": -7.4,
+      "drawdown": -5.98,
       "return": 11.39
     },
     {
       "year": 2015,
-      "drawdown": -12.35,
+      "drawdown": -9.32,
       "return": -0.73
     },
     {
       "year": 2016,
-      "drawdown": -9.3,
+      "drawdown": -11.44,
       "return": 9.54
     },
     {
       "year": 2017,
-      "drawdown": -2.8,
+      "drawdown": 0.0,
       "return": 19.42
     },
     {
       "year": 2018,
-      "drawdown": -19.78,
+      "drawdown": -12.23,
       "return": -6.24
     },
     {
       "year": 2019,
-      "drawdown": -6.84,
+      "drawdown": -2.51,
       "return": 28.88
     },
     {
       "year": 2020,
-      "drawdown": -33.92,
+      "drawdown": -32.16,
       "return": 16.26
     },
     {
       "year": 2021,
-      "drawdown": -5.21,
+      "drawdown": -2.49,
       "return": 26.89
     },
     {
       "year": 2022,
-      "drawdown": -25.43,
+      "drawdown": -26.74,
       "return": -19.44
     },
     {
       "year": 2023,
-      "drawdown": -10.28,
+      "drawdown": -1.18,
       "return": 24.23
     },
     {
       "year": 2024,
-      "drawdown": -8.49,
+      "drawdown": -1.84,
       "return": 23.31
     },
     {
       "year": 2025,
-      "drawdown": -18.9,
+      "drawdown": -17.79,
       "return": 16.39
     },
     {
       "year": 2026,
-      "drawdown": -6.77,
+      "drawdown": -5.43,
       "return": -3.7
     }
   ]

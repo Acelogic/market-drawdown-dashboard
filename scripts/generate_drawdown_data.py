@@ -2,8 +2,9 @@
 """
 Generate intra-year drawdown data for S&P 500, Nasdaq 100, and Nasdaq Composite.
 
-Downloads daily closing prices from Yahoo Finance, calculates the maximum
-intra-year drawdown for each calendar year, and writes JSON files to data/.
+Downloads daily prices from Yahoo Finance and calculates drawdowns using the
+SlickCharts methodology: decline from previous year's closing price to the
+year's intra-day low. Writes JSON files to data/.
 
 Usage:
     python scripts/generate_drawdown_data.py
@@ -22,45 +23,57 @@ INDICES = {
     "ixic": {"symbol": "^IXIC", "start": "1971-01-01", "name": "Nasdaq Composite"},
 }
 
+# Fallback previous-year closes for years before Yahoo Finance data begins.
+# Source: SlickCharts S&P 500 drawdown table.
+PREV_YEAR_CLOSE_FALLBACKS = {
+    "^GSPC": {1928: 17.66},  # 1927 close
+}
+
 DATA_DIR = Path(__file__).parent.parent / "data"
 
 
-def calculate_yearly_stats(daily_prices):
+def calculate_yearly_stats(close_prices, low_prices, symbol):
     """
-    Given a pandas Series of daily closing prices indexed by date,
+    Given pandas Series of daily closing and intra-day low prices indexed by date,
     return a list of {"year": int, "drawdown": float, "return": float} dicts.
 
-    drawdown: worst peak-to-trough decline within each calendar year (negative %)
-    return: full-year return from first close to last close (%)
+    drawdown: decline from previous year's last close to the year's intra-day low (%).
+              Matches SlickCharts methodology. Capped at 0 if the low never undercuts
+              the previous year's close.
+    return: full-year return from previous year's last close to this year's last close (%)
     """
     results = []
-    grouped = daily_prices.groupby(daily_prices.index.year)
+    grouped_close = close_prices.groupby(close_prices.index.year)
+    grouped_low = low_prices.groupby(low_prices.index.year)
+    fallbacks = PREV_YEAR_CLOSE_FALLBACKS.get(symbol, {})
     prev_year_last_close = None
 
-    for year, group in sorted(grouped):
-        if len(group) < 2:
-            prev_year_last_close = float(group.values[-1])
+    for year, close_group in sorted(grouped_close):
+        if len(close_group) < 2:
+            prev_year_last_close = float(close_group.values[-1])
             continue
-        prices = group.values
 
-        # Max intra-year drawdown
-        peak = prices[0]
-        max_drawdown = 0.0
-        for price in prices:
-            if price > peak:
-                peak = price
-            drawdown = (price - peak) / peak
-            if drawdown < max_drawdown:
-                max_drawdown = drawdown
+        # Use hardcoded fallback if no previous year data exists
+        if prev_year_last_close is None and year in fallbacks:
+            prev_year_last_close = fallbacks[year]
+
+        low_group = grouped_low.get_group(year)
+        year_low = float(low_group.min())
 
         # Year return: use previous year's last close as start if available
-        start_price = prev_year_last_close if prev_year_last_close else float(prices[0])
-        end_price = float(prices[-1])
+        start_price = prev_year_last_close if prev_year_last_close else float(close_group.values[0])
+        end_price = float(close_group.values[-1])
         year_return = ((end_price - start_price) / start_price) * 100
+
+        # Drawdown: decline from prev year close to year's intra-day low
+        if prev_year_last_close and year_low < prev_year_last_close:
+            drawdown = ((year_low - prev_year_last_close) / prev_year_last_close) * 100
+        else:
+            drawdown = 0.0
 
         results.append({
             "year": int(year),
-            "drawdown": round(max_drawdown * 100, 2),
+            "drawdown": round(drawdown, 2),
             "return": round(year_return, 2),
         })
         prev_year_last_close = end_price
@@ -96,9 +109,10 @@ def main():
             continue
 
         close = hist["Close"]
+        low = hist["Low"]
         print(f"  Got {len(close)} daily prices from {close.index[0].date()} to {close.index[-1].date()}")
 
-        yearly_stats = calculate_yearly_stats(close)
+        yearly_stats = calculate_yearly_stats(close, low, symbol)
         ath = find_all_time_high(close)
 
         output = {
