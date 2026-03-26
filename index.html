@@ -1084,10 +1084,17 @@
           var key = keys[i];
           if (quotes[key]) {
             var q = quotes[key];
+
+            // Update ATH from Yahoo's 52-week high (includes intraday, more accurate)
+            if (q.fiftyTwoWeekHigh && q.fiftyTwoWeekHigh > ATH[key].price) {
+              ATH[key].price = q.fiftyTwoWeekHigh;
+            }
+
             updateCardDrawdown(key, q.price);
             updateCurrentYearTable(key, q.price);
             if (q.marketState) marketState = q.marketState;
 
+            // Populate detailed metrics from live data
             document.getElementById(key + "-current").textContent       = formatPrice(q.price);
             document.getElementById(key + "-ath-price").textContent     = formatPrice(q.fiftyTwoWeekHigh);
             document.getElementById(key + "-ytd-low").textContent       = formatPrice(q.ytdLow);
