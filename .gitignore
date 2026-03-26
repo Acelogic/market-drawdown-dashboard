@@ -3,3 +3,4 @@ __pycache__/
 .superpowers/
 .DS_Store
 *.png
+!sp500_decades_avg.png
