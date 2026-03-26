@@ -60,6 +60,14 @@
       animation: pulse 2s ease-in-out infinite;
     }
 
+    .pulse-dot.live-dot {
+      background-color: #27ae60;
+    }
+
+    .pulse-dot.live-dot.error-dot {
+      background-color: #e74c3c;
+    }
+
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
       50%       { opacity: 0.5; transform: scale(0.85); }
@@ -667,6 +675,120 @@
       }
     }
 
+    // ── Live Data Fetching ────────────────────────────────────────────────────
+
+    const SYMBOLS = {
+      sp500: "^GSPC",
+      ndx:   "^NDX",
+      ixic:  "^IXIC",
+    };
+
+    // YTD peaks — initialized from ATH prices, updated as live data comes in
+    const ytdPeak = {
+      sp500: ATH.sp500.price,
+      ndx:   ATH.ndx.price,
+      ixic:  ATH.ixic.price,
+    };
+
+    async function fetchQuote(symbol) {
+      const encodedSymbol = encodeURIComponent(symbol);
+      const url = "https://corsproxy.io/?https://query1.finance.yahoo.com/v8/finance/chart/" +
+                  encodedSymbol + "?range=1d&interval=1m";
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error("HTTP " + resp.status + " for " + symbol);
+      const data = await resp.json();
+      const meta = data.chart.result[0].meta;
+      return {
+        price:       meta.regularMarketPrice,
+        marketState: meta.marketState,
+      };
+    }
+
+    function updateStatusLine(success, marketState) {
+      const dot  = document.querySelector(".pulse-dot");
+      const text = document.getElementById("status-text");
+
+      if (success) {
+        dot.className = "pulse-dot live-dot";
+        const now = new Date().toLocaleTimeString("en-US", {
+          hour: "2-digit", minute: "2-digit", second: "2-digit"
+        });
+        const stateLabel = marketState ? marketState.charAt(0) + marketState.slice(1).toLowerCase() : "";
+        text.textContent =
+          (stateLabel ? stateLabel + " market \u00b7 " : "") +
+          "Last updated " + now + " \u00b7 Auto-refreshes every 60s";
+      } else {
+        dot.className = "pulse-dot live-dot error-dot";
+        text.textContent = "Live data unavailable \u2014 Showing historical data only";
+      }
+    }
+
+    function updateCardDrawdown(key, currentPrice) {
+      const drawdown = ((currentPrice - ATH[key].price) / ATH[key].price) * 100;
+
+      // If new ATH, update static reference
+      if (currentPrice > ATH[key].price) {
+        ATH[key].price = currentPrice;
+        // Update ATH price display
+        document.getElementById(key + "-ath-price").textContent = formatPrice(currentPrice);
+      }
+
+      const ddEl = document.getElementById(key + "-drawdown");
+      // Remove old severity and loading classes
+      ddEl.className = "card-drawdown " + severityClass(drawdown);
+      ddEl.textContent = drawdown.toFixed(2) + "%";
+
+      document.getElementById(key + "-current").textContent = formatPrice(currentPrice);
+    }
+
+    function updateCurrentYearTable(key, currentPrice) {
+      const currentYear = new Date().getFullYear();
+
+      // Update YTD peak
+      if (currentPrice > ytdPeak[key]) {
+        ytdPeak[key] = currentPrice;
+      }
+
+      // Calculate YTD drawdown from YTD peak
+      const ytdDrawdown = ((currentPrice - ytdPeak[key]) / ytdPeak[key]) * 100;
+
+      // Map key to its data array
+      const dataMap = { sp500: SP500_DATA, ndx: NDX_DATA, ixic: IXIC_DATA };
+      const arr = dataMap[key];
+
+      const entry = arr.find(e => e.year === currentYear);
+      if (entry) {
+        entry.drawdown = parseFloat(ytdDrawdown.toFixed(2));
+      } else {
+        arr.push({ year: currentYear, drawdown: parseFloat(ytdDrawdown.toFixed(2)) });
+      }
+    }
+
+    async function refreshLiveData() {
+      const keys = ["sp500", "ndx", "ixic"];
+      let anySuccess = false;
+      let lastMarketState = null;
+
+      await Promise.all(keys.map(async (key) => {
+        try {
+          const { price, marketState } = await fetchQuote(SYMBOLS[key]);
+          anySuccess = true;
+          lastMarketState = marketState;
+          updateCardDrawdown(key, price);
+          updateCurrentYearTable(key, price);
+        } catch (err) {
+          console.warn("Failed to fetch live data for", SYMBOLS[key], err);
+        }
+      }));
+
+      if (anySuccess) {
+        renderTable();
+        updateStatusLine(true, lastMarketState);
+      } else {
+        updateStatusLine(false, null);
+      }
+    }
+
     // ── Init ──────────────────────────────────────────────────────────────────
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -674,6 +796,8 @@
       renderTable();
       document.getElementById("status-text").textContent =
         "Historical data loaded. Live prices loading\u2026";
+      refreshLiveData();
+      setInterval(refreshLiveData, 60_000);
     });
   </script>
 </body>
