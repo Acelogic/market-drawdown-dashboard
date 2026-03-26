@@ -359,6 +359,46 @@
       flex-shrink: 0;
     }
 
+    /* ── Filter Bar ── */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .filter-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .filter-btn {
+      --btn-color: #888;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 2px solid var(--btn-color);
+      border-radius: 20px;
+      background: transparent;
+      color: var(--btn-color);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover {
+      background: var(--btn-color);
+      color: #fff;
+    }
+
+    .filter-btn.active {
+      background: var(--btn-color);
+      color: #fff;
+    }
+
     /* ── Mobile Responsive ── */
     @media (max-width: 768px) {
       .container {
@@ -405,6 +445,15 @@
       .legend-swatch {
         width: 11px;
         height: 11px;
+      }
+
+      .filter-btn {
+        padding: 4px 9px;
+        font-size: 11px;
+      }
+
+      .filter-label {
+        font-size: 11px;
       }
 
       .color-key {
@@ -626,6 +675,15 @@
         <!-- Populated by JS -->
       </div>
 
+      <div class="filter-bar" id="filter-bar">
+        <span class="filter-label">Filter:</span>
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="severe" style="--btn-color:#e74c3c">&ge;20% Severe</button>
+        <button class="filter-btn" data-filter="high" style="--btn-color:#e67e22">&ge;14% High</button>
+        <button class="filter-btn" data-filter="moderate" style="--btn-color:#f39c12">&ge;10% Moderate</button>
+        <button class="filter-btn" data-filter="mild" style="--btn-color:#27ae60">&lt;10% Mild</button>
+      </div>
+
       <div class="table-wrapper">
         <table id="drawdown-table">
           <thead>
@@ -813,6 +871,19 @@
 
     // ── Table Rendering ───────────────────────────────────────────────────────
 
+    // ── Filter state ───────────────────────────────────────────────────────
+    var activeFilter = "all"; // "all", "severe", "high", "moderate", "mild"
+
+    function matchesFilter(worst) {
+      var abs = Math.abs(worst);
+      if (activeFilter === "all") return true;
+      if (activeFilter === "severe") return abs >= 20;
+      if (activeFilter === "high") return abs >= 14 && abs < 20;
+      if (activeFilter === "moderate") return abs >= 10 && abs < 14;
+      if (activeFilter === "mild") return abs < 10;
+      return true;
+    }
+
     function renderTable() {
       const sp500Map = buildYearMap(SP500_DATA);
       const ndxMap   = buildYearMap(NDX_DATA);
@@ -851,10 +922,13 @@
       // Sort: newest year first
       rows.sort((a, b) => b.year - a.year);
 
+      // Apply severity filter
+      var filtered = rows.filter(function(row) { return matchesFilter(row.worst); });
+
       const tbody = document.getElementById("table-body");
       tbody.textContent = ""; // clear without innerHTML
 
-      rows.forEach((row, idx) => {
+      filtered.forEach((row, idx) => {
         const tr = document.createElement("tr");
         if (row.year === currentYear) tr.classList.add("current-year");
 
@@ -1114,6 +1188,21 @@
       populateCards();
       buildColorKey();
       renderTable();
+
+      // Filter button clicks
+      var filterBar = document.getElementById("filter-bar");
+      filterBar.addEventListener("click", function (e) {
+        var btn = e.target.closest(".filter-btn");
+        if (!btn) return;
+        activeFilter = btn.getAttribute("data-filter");
+        var buttons = filterBar.querySelectorAll(".filter-btn");
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].classList.remove("active");
+        }
+        btn.classList.add("active");
+        renderTable();
+      });
+
       document.getElementById("status-text").textContent =
         "Historical data loaded. Live prices loading\u2026";
       refreshLiveData();
