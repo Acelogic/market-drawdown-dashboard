@@ -8,171 +8,213 @@
   "drawdowns": [
     {
       "year": 1985,
-      "drawdown": -4.44
+      "drawdown": -4.44,
+      "return": 17.97
     },
     {
       "year": 1986,
-      "drawdown": -17.98
+      "drawdown": -17.98,
+      "return": 6.89
     },
     {
       "year": 1987,
-      "drawdown": -39.93
+      "drawdown": -39.93,
+      "return": 10.5
     },
     {
       "year": 1988,
-      "drawdown": -14.64
+      "drawdown": -14.64,
+      "return": 13.54
     },
     {
       "year": 1989,
-      "drawdown": -10.95
+      "drawdown": -10.95,
+      "return": 26.17
     },
     {
       "year": 1990,
-      "drawdown": -32.9
+      "drawdown": -32.9,
+      "return": -10.41
     },
     {
       "year": 1991,
-      "drawdown": -11.47
+      "drawdown": -11.47,
+      "return": 64.99
     },
     {
       "year": 1992,
-      "drawdown": -18.53
+      "drawdown": -18.53,
+      "return": 8.86
     },
     {
       "year": 1993,
-      "drawdown": -14.18
+      "drawdown": -14.18,
+      "return": 10.58
     },
     {
       "year": 1994,
-      "drawdown": -15.94
+      "drawdown": -15.94,
+      "return": 1.5
     },
     {
       "year": 1995,
-      "drawdown": -11.85
+      "drawdown": -11.85,
+      "return": 42.54
     },
     {
       "year": 1996,
-      "drawdown": -14.44
+      "drawdown": -14.44,
+      "return": 42.54
     },
     {
       "year": 1997,
-      "drawdown": -18.22
+      "drawdown": -18.22,
+      "return": 20.63
     },
     {
       "year": 1998,
-      "drawdown": -22.99
+      "drawdown": -22.99,
+      "return": 85.3
     },
     {
       "year": 1999,
-      "drawdown": -12.02
+      "drawdown": -12.02,
+      "return": 101.95
     },
     {
       "year": 2000,
-      "drawdown": -53.02
+      "drawdown": -53.02,
+      "return": -36.84
     },
     {
       "year": 2001,
-      "drawdown": -58.72
+      "drawdown": -58.72,
+      "return": -32.65
     },
     {
       "year": 2002,
-      "drawdown": -51.96
+      "drawdown": -51.96,
+      "return": -37.58
     },
     {
       "year": 2003,
-      "drawdown": -13.06
+      "drawdown": -13.06,
+      "return": 49.12
     },
     {
       "year": 2004,
-      "drawdown": -16.04
+      "drawdown": -16.04,
+      "return": 10.44
     },
     {
       "year": 2005,
-      "drawdown": -12.26
+      "drawdown": -12.26,
+      "return": 1.49
     },
     {
       "year": 2006,
-      "drawdown": -17.42
+      "drawdown": -17.42,
+      "return": 6.79
     },
     {
       "year": 2007,
-      "drawdown": -11.47
+      "drawdown": -11.47,
+      "return": 18.67
     },
     {
       "year": 2008,
-      "drawdown": -49.56
+      "drawdown": -49.56,
+      "return": -41.89
     },
     {
       "year": 2009,
-      "drawdown": -18.55
+      "drawdown": -18.55,
+      "return": 53.54
     },
     {
       "year": 2010,
-      "drawdown": -15.91
+      "drawdown": -15.91,
+      "return": 19.22
     },
     {
       "year": 2011,
-      "drawdown": -16.11
+      "drawdown": -16.11,
+      "return": 2.7
     },
     {
       "year": 2012,
-      "drawdown": -11.86
+      "drawdown": -11.86,
+      "return": 16.82
     },
     {
       "year": 2013,
-      "drawdown": -5.97
+      "drawdown": -5.97,
+      "return": 34.99
     },
     {
       "year": 2014,
-      "drawdown": -8.23
+      "drawdown": -8.23,
+      "return": 17.94
     },
     {
       "year": 2015,
-      "drawdown": -14.18
+      "drawdown": -14.18,
+      "return": 8.43
     },
     {
       "year": 2016,
-      "drawdown": -12.23
+      "drawdown": -12.23,
+      "return": 5.89
     },
     {
       "year": 2017,
-      "drawdown": -4.9
+      "drawdown": -4.9,
+      "return": 31.52
     },
     {
       "year": 2018,
-      "drawdown": -22.99
+      "drawdown": -22.99,
+      "return": -1.04
     },
     {
       "year": 2019,
-      "drawdown": -11.06
+      "drawdown": -11.06,
+      "return": 37.96
     },
     {
       "year": 2020,
-      "drawdown": -28.03
+      "drawdown": -28.03,
+      "return": 47.58
     },
     {
       "year": 2021,
-      "drawdown": -10.93
+      "drawdown": -10.93,
+      "return": 26.63
     },
     {
       "year": 2022,
-      "drawdown": -35.28
+      "drawdown": -35.28,
+      "return": -32.97
     },
     {
       "year": 2023,
-      "drawdown": -10.93
+      "drawdown": -10.93,
+      "return": 53.81
     },
     {
       "year": 2024,
-      "drawdown": -13.58
+      "drawdown": -13.58,
+      "return": 24.88
     },
     {
       "year": 2025,
-      "drawdown": -22.93
+      "drawdown": -22.93,
+      "return": 20.17
     },
     {
       "year": 2026,
-      "drawdown": -8.16
+      "drawdown": -8.16,
+      "return": -4.3
     }
   ]
 }

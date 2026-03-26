@@ -25,21 +25,25 @@ INDICES = {
 DATA_DIR = Path(__file__).parent.parent / "data"
 
 
-def calculate_intra_year_drawdowns(daily_prices):
+def calculate_yearly_stats(daily_prices):
     """
     Given a pandas Series of daily closing prices indexed by date,
-    return a list of {"year": int, "drawdown": float} dicts.
+    return a list of {"year": int, "drawdown": float, "return": float} dicts.
 
-    Drawdown is the worst peak-to-trough decline within each calendar year,
-    expressed as a negative percentage (e.g., -32.16 for -32.16%).
+    drawdown: worst peak-to-trough decline within each calendar year (negative %)
+    return: full-year return from first close to last close (%)
     """
     results = []
     grouped = daily_prices.groupby(daily_prices.index.year)
+    prev_year_last_close = None
 
-    for year, group in grouped:
+    for year, group in sorted(grouped):
         if len(group) < 2:
+            prev_year_last_close = float(group.values[-1])
             continue
         prices = group.values
+
+        # Max intra-year drawdown
         peak = prices[0]
         max_drawdown = 0.0
         for price in prices:
@@ -48,7 +52,18 @@ def calculate_intra_year_drawdowns(daily_prices):
             drawdown = (price - peak) / peak
             if drawdown < max_drawdown:
                 max_drawdown = drawdown
-        results.append({"year": int(year), "drawdown": round(max_drawdown * 100, 2)})
+
+        # Year return: use previous year's last close as start if available
+        start_price = prev_year_last_close if prev_year_last_close else float(prices[0])
+        end_price = float(prices[-1])
+        year_return = ((end_price - start_price) / start_price) * 100
+
+        results.append({
+            "year": int(year),
+            "drawdown": round(max_drawdown * 100, 2),
+            "return": round(year_return, 2),
+        })
+        prev_year_last_close = end_price
 
     return results
 
@@ -83,20 +98,20 @@ def main():
         close = hist["Close"]
         print(f"  Got {len(close)} daily prices from {close.index[0].date()} to {close.index[-1].date()}")
 
-        drawdowns = calculate_intra_year_drawdowns(close)
+        yearly_stats = calculate_yearly_stats(close)
         ath = find_all_time_high(close)
 
         output = {
             "index": name,
             "symbol": symbol,
             "ath": ath,
-            "drawdowns": drawdowns,
+            "drawdowns": yearly_stats,
         }
 
         out_path = DATA_DIR / f"{key}_drawdowns.json"
         with open(out_path, "w") as f:
             json.dump(output, f, indent=2)
-        print(f"  Wrote {len(drawdowns)} years to {out_path}")
+        print(f"  Wrote {len(yearly_stats)} years to {out_path}")
 
     print("\nDone. Files written to data/")
 
