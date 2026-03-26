@@ -907,8 +907,8 @@
       var abs = Math.abs(worst);
       if (activeFilter === "all") return true;
       if (activeFilter === "severe") return abs >= 20;
-      if (activeFilter === "high") return abs >= 14 && abs < 20;
-      if (activeFilter === "moderate") return abs >= 10 && abs < 14;
+      if (activeFilter === "high") return abs >= 14;
+      if (activeFilter === "moderate") return abs >= 10;
       if (activeFilter === "mild") return abs < 10;
       return true;
     }
