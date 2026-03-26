@@ -1003,7 +1003,13 @@
         var dot = document.querySelector(".pulse-dot");
         var text = document.getElementById("status-text");
         dot.className = "pulse-dot live-dot";
-        var stateLabel = marketState ? marketState.charAt(0) + marketState.slice(1).toLowerCase() : "";
+        var stateLabel = "";
+        if (marketState && marketState !== "UNKNOWN") {
+          stateLabel = marketState === "REGULAR" ? "Market Open" :
+                       marketState === "PRE" ? "Pre-Market" :
+                       marketState === "POST" ? "After Hours" :
+                       marketState === "CLOSED" ? "Market Closed" : "";
+        }
         text.textContent =
           (stateLabel ? stateLabel + " \u00b7 " : "") +
           "Prices from " + ageLabel + " \u00b7 Auto-refreshes every 60s";
