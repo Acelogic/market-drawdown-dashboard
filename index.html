@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Market Drawdown Dashboard</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #FBFCEA;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* ── Header ── */
+    header {
+      margin-bottom: 28px;
+    }
+
+    header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+    }
+
+    header .subtitle {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .status-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #27ae60;
+      flex-shrink: 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    /* ── Cards ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+      padding: 20px 22px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .card-drawdown {
+      font-size: 36px;
+      font-weight: 700;
+      color: #e74c3c;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .card-drawdown.loading {
+      font-size: 24px;
+      color: #aaa;
+    }
+
+    .card-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .card-meta-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .card-meta-row .label {
+      color: #888;
+    }
+
+    .card-meta-row .value {
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* ── Comparison Table Section ── */
+    .table-section {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+      padding: 24px 20px;
+      margin-bottom: 24px;
+    }
+
+    .table-section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 14px;
+    }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: #444;
+    }
+
+    .legend-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .swatch-sp500  { background-color: #e74c3c; }
+    .swatch-ndx    { background-color: #3498db; }
+    .swatch-ixic   { background-color: #9b59b6; }
+
+    /* Table wrapper for horizontal scroll on mobile */
+    .table-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 8px 10px;
+      border-bottom: 2px solid #e8e8d8;
+      white-space: nowrap;
+    }
+
+    thead th.center {
+      text-align: center;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #f0f0e0;
+      transition: background 0.15s;
+    }
+
+    tbody tr:hover {
+      background-color: #f5f5e8;
+    }
+
+    tbody tr.current-year {
+      background-color: #fffde7;
+      border-left: 3px solid #f1c40f;
+    }
+
+    tbody tr.current-year:hover {
+      background-color: #fffbcc;
+    }
+
+    td {
+      padding: 7px 10px;
+      font-size: 13px;
+      vertical-align: middle;
+    }
+
+    td.rank {
+      color: #aaa;
+      font-size: 12px;
+      text-align: right;
+      width: 32px;
+    }
+
+    td.year-cell {
+      font-weight: 600;
+      color: #1a1a2e;
+      width: 56px;
+    }
+
+    td.index-cell {
+      min-width: 120px;
+    }
+
+    td.dash-cell {
+      text-align: center;
+      color: #bbb;
+      font-size: 15px;
+    }
+
+    /* Bar + pct wrapper */
+    .bar-pct {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 10px;
+      background-color: #f0f0e0;
+      border-radius: 5px;
+      overflow: hidden;
+      min-width: 60px;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.3s ease;
+    }
+
+    .bar-fill.sp500 { background-color: #e74c3c; }
+    .bar-fill.ndx   { background-color: #3498db; }
+    .bar-fill.ixic  { background-color: #9b59b6; }
+
+    .pct-text {
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      min-width: 52px;
+      text-align: right;
+    }
+
+    /* Severity color classes */
+    .severity-severe   { color: #e74c3c; }
+    .severity-high     { color: #e67e22; }
+    .severity-moderate { color: #f39c12; }
+    .severity-mild     { color: #27ae60; }
+
+    /* ── Footer ── */
+    footer {
+      font-size: 12px;
+      color: #888;
+      line-height: 1.6;
+      padding: 8px 0 24px;
+    }
+
+    footer a {
+      color: #888;
+      text-decoration: underline;
+    }
+
+    footer a:hover {
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <h1>Market Drawdown Dashboard</h1>
+      <p class="subtitle">S&amp;P 500 &middot; Nasdaq 100 (NDX) &middot; Nasdaq Composite (IXIC) — annual intra-year drawdowns</p>
+      <div class="status-line">
+        <span class="pulse-dot"></span>
+        <span id="status-text">Initializing&hellip;</span>
+      </div>
+    </header>
+
+    <!-- Drawdown Cards -->
+    <div class="cards">
+
+      <div class="card" id="card-sp500">
+        <div class="card-title">S&amp;P 500</div>
+        <div class="card-drawdown loading" id="sp500-drawdown">—</div>
+        <div class="card-meta">
+          <div class="card-meta-row">
+            <span class="label">ATH Price</span>
+            <span class="value" id="sp500-ath-price">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Current Price</span>
+            <span class="value" id="sp500-current">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">ATH Date</span>
+            <span class="value" id="sp500-ath-date">Loading…</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="card-ndx">
+        <div class="card-title">Nasdaq 100 (NDX)</div>
+        <div class="card-drawdown loading" id="ndx-drawdown">—</div>
+        <div class="card-meta">
+          <div class="card-meta-row">
+            <span class="label">ATH Price</span>
+            <span class="value" id="ndx-ath-price">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Current Price</span>
+            <span class="value" id="ndx-current">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">ATH Date</span>
+            <span class="value" id="ndx-ath-date">Loading…</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="card-ixic">
+        <div class="card-title">Nasdaq Composite (IXIC)</div>
+        <div class="card-drawdown loading" id="ixic-drawdown">—</div>
+        <div class="card-meta">
+          <div class="card-meta-row">
+            <span class="label">ATH Price</span>
+            <span class="value" id="ixic-ath-price">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">Current Price</span>
+            <span class="value" id="ixic-current">Loading…</span>
+          </div>
+          <div class="card-meta-row">
+            <span class="label">ATH Date</span>
+            <span class="value" id="ixic-ath-date">Loading…</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.cards -->
+
+    <!-- Comparison Table -->
+    <div class="table-section">
+      <h2>Annual Intra-Year Drawdowns by Year</h2>
+
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-swatch swatch-sp500"></div>
+          <span>S&amp;P 500</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch swatch-ndx"></div>
+          <span>Nasdaq 100 (NDX)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch swatch-ixic"></div>
+          <span>Nasdaq Composite (IXIC)</span>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="drawdown-table">
+          <thead>
+            <tr>
+              <th class="center">#</th>
+              <th>Year</th>
+              <th colspan="2">S&amp;P 500</th>
+              <th colspan="2">Nasdaq 100</th>
+              <th colspan="2">Nasdaq Composite</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div><!-- /.table-section -->
+
+    <!-- Footer -->
+    <footer>
+      <p>Data sources: S&amp;P 500 data since 1928 via Yahoo Finance (<code>^GSPC</code>); Nasdaq 100 (NDX, <code>^NDX</code>) since 1985; Nasdaq Composite (<code>^IXIC</code>) since 1971.</p>
+      <p>Inception dates: S&amp;P 500 &mdash; 1928 &nbsp;|&nbsp; Nasdaq Composite &mdash; February 5, 1971 &nbsp;|&nbsp; Nasdaq 100 &mdash; January 31, 1985.</p>
+      <p>Drawdown values represent the largest peak-to-trough decline within each calendar year.</p>
+    </footer>
+
+  </div><!-- /.container -->
+
+  <script>
+    // Data and rendering will be added here
+  </script>
+</body>
+</html>
