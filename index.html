@@ -691,9 +691,9 @@
     };
 
     async function fetchQuote(symbol) {
-      const encodedSymbol = encodeURIComponent(symbol);
-      const url = "https://corsproxy.io/?https://query1.finance.yahoo.com/v8/finance/chart/" +
-                  encodedSymbol + "?range=1d&interval=1m";
+      const yahooUrl = "https://query1.finance.yahoo.com/v8/finance/chart/" +
+                       encodeURIComponent(symbol) + "?range=1d&interval=1m";
+      const url = "https://api.allorigins.win/raw?url=" + encodeURIComponent(yahooUrl);
       const resp = await fetch(url);
       if (!resp.ok) throw new Error("HTTP " + resp.status + " for " + symbol);
       const data = await resp.json();
