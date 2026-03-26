@@ -611,8 +611,8 @@
         rows.push({ year, sp, ndx, ixic, worst });
       }
 
-      // Sort: worst (most negative) first
-      rows.sort((a, b) => a.worst - b.worst);
+      // Sort: newest year first
+      rows.sort((a, b) => b.year - a.year);
 
       const tbody = document.getElementById("table-body");
       tbody.textContent = ""; // clear without innerHTML
