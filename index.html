@@ -1093,6 +1093,12 @@
       }
     }
 
+    var refreshTimer = null;
+    function scheduleNextRefresh(ms) {
+      clearTimeout(refreshTimer);
+      refreshTimer = setTimeout(refreshLiveData, ms);
+    }
+
     async function refreshLiveData() {
       try {
         var data = await fetchLiveQuotes();
@@ -1160,12 +1166,16 @@
             (stateLabel ? stateLabel + " \u00b7 " : "") +
             "Prices from " + ageLabel + " \u00b7 Auto-refreshes every 60s";
         }
+
+        // Schedule next refresh: 60s when data is fresh, 5 min when stale
+        scheduleNextRefresh(isStale ? 300_000 : 60_000);
       } catch (err) {
         console.warn("Failed to fetch live data:", err);
         var dot = document.querySelector(".pulse-dot");
         var text = document.getElementById("status-text");
         dot.className = "pulse-dot live-dot error-dot";
         text.textContent = "Live data unavailable \u2014 Showing historical data only";
+        scheduleNextRefresh(300_000); // retry in 5 min on error
       }
     }
 
@@ -1279,7 +1289,6 @@
       document.getElementById("status-text").textContent =
         "Historical data loaded. Live prices loading\u2026";
       refreshLiveData();
-      setInterval(refreshLiveData, 60_000);
     });
   </script>
 </body>
