@@ -1,0 +1,36 @@
+name: Watchdog – Ensure Quotes Stay Fresh
+
+on:
+  schedule:
+    # Every 30 minutes during market hours (offset from fetch-quotes to maximize coverage)
+    - cron: '15,45 13-21 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check staleness and trigger fetch if needed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TIMESTAMP=$(python3 -c "
+          import json, sys
+          from datetime import datetime, timezone
+          data = json.load(open('data/live.json'))
+          ts = datetime.fromisoformat(data['timestamp'])
+          age = (datetime.now(timezone.utc) - ts).total_seconds() / 60
+          print(int(age))
+          ")
+          echo "Data is ${TIMESTAMP} minutes old"
+          if [ "$TIMESTAMP" -gt 15 ]; then
+            echo "Quotes are stale – triggering fetch workflow"
+            gh workflow run fetch-quotes.yml
+          else
+            echo "Quotes are fresh – nothing to do"
+          fi
