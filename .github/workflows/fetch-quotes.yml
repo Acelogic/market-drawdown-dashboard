@@ -2,9 +2,12 @@ name: Fetch Live Quotes
 
 on:
   schedule:
-    # Every 5 minutes during US market hours (9:30 AM - 4:00 PM ET = 13:30 - 20:00 UTC)
-    # Monday through Friday
-    - cron: '*/5 13-20 * * 1-5'
+    # Every 5 minutes during US market hours + after-hours (9:30 AM - 5:00 PM ET = 13:30 - 21:00 UTC)
+    - cron: '*/5 13-21 * * 1-5'
+    # A few pre-market and overnight runs so data never goes 16+ hours stale
+    - cron: '0 0,4,8,12 * * 1-5'
+    # Once on weekends (keeps the "last updated" from drifting to Friday)
+    - cron: '0 14 * * 0,6'
   workflow_dispatch: # Allow manual trigger
 
 jobs:

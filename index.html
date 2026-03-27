@@ -82,6 +82,11 @@
       background-color: #e74c3c;
     }
 
+    .pulse-dot.live-dot.stale-dot {
+      background-color: #999;
+      animation: none;
+    }
+
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
       50%       { opacity: 0.5; transform: scale(0.85); }
@@ -1123,11 +1128,11 @@
 
         // Show when the data was fetched by the GitHub Action
         var ts = new Date(data.timestamp);
-        var age = Math.round((Date.now() - ts.getTime()) / 60000);
-        var ageLabel = age < 1 ? "just now" : age + "m ago";
+        var ageMs = Date.now() - ts.getTime();
+        var ageMin = Math.round(ageMs / 60000);
         var dot = document.querySelector(".pulse-dot");
         var text = document.getElementById("status-text");
-        dot.className = "pulse-dot live-dot";
+
         var stateLabel = "";
         if (marketState && marketState !== "UNKNOWN") {
           stateLabel = marketState === "REGULAR" ? "Market Open" :
@@ -1135,9 +1140,26 @@
                        marketState === "POST" ? "After Hours" :
                        marketState === "CLOSED" ? "Market Closed" : "";
         }
-        text.textContent =
-          (stateLabel ? stateLabel + " \u00b7 " : "") +
-          "Prices from " + ageLabel + " \u00b7 Auto-refreshes every 60s";
+
+        var isStale = ageMin > 15;
+        if (isStale) {
+          // Format a human-readable timestamp instead of "992m ago"
+          var now = new Date();
+          var sameDay = ts.toDateString() === now.toDateString();
+          var timeStr = ts.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+          var dateStr = sameDay
+            ? "today at " + timeStr
+            : ts.toLocaleDateString("en-US", { month: "short", day: "numeric" }) + " at " + timeStr;
+          dot.className = "pulse-dot live-dot stale-dot";
+          if (!stateLabel) stateLabel = "Market Closed";
+          text.textContent = stateLabel + " \u00b7 Last updated " + dateStr;
+        } else {
+          var ageLabel = ageMin < 1 ? "just now" : ageMin + "m ago";
+          dot.className = "pulse-dot live-dot";
+          text.textContent =
+            (stateLabel ? stateLabel + " \u00b7 " : "") +
+            "Prices from " + ageLabel + " \u00b7 Auto-refreshes every 60s";
+        }
       } catch (err) {
         console.warn("Failed to fetch live data:", err);
         var dot = document.querySelector(".pulse-dot");
