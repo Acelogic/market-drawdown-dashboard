@@ -23,19 +23,7 @@
       "drawdownCurrent": -1.3,
       "gainFromLow": 13.14,
       "gainToATH": 1.32
-    },
-    "ixic": {
-      "price": 23639.08,
-      "previousClose": 23241.99,
-      "marketState": "UNKNOWN",
-      "fiftyTwoWeekHigh": 24019.99,
-      "fiftyTwoWeekLow": 15685.33,
-      "ytdLow": 20690.25,
-      "drawdownAtLow": -13.86,
-      "drawdownCurrent": -1.59,
-      "gainFromLow": 14.25,
-      "gainToATH": 1.61
     }
   },
-  "timestamp": "2026-04-15T09:09:31.725398+00:00"
+  "timestamp": "2026-04-15T12:58:58.344576+00:00"
 }
