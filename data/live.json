@@ -17,7 +17,7 @@
       "previousClose": 25249.85,
       "marketState": "UNKNOWN",
       "fiftyTwoWeekHigh": 29372.43,
-      "fiftyTwoWeekLow": 20613.27,
+      "fiftyTwoWeekLow": 20777.97,
       "ytdLow": 22841.42,
       "drawdownAtLow": -22.24,
       "drawdownCurrent": -0.18,
@@ -29,7 +29,7 @@
       "previousClose": 23241.99,
       "marketState": "UNKNOWN",
       "fiftyTwoWeekHigh": 26359.31,
-      "fiftyTwoWeekLow": 18472.71,
+      "fiftyTwoWeekLow": 18599.69,
       "ytdLow": 20690.25,
       "drawdownAtLow": -21.51,
       "drawdownCurrent": -0.32,
@@ -37,5 +37,5 @@
       "gainToATH": 0.32
     }
   },
-  "timestamp": "2026-05-11T22:37:37.116462+00:00"
+  "timestamp": "2026-05-12T01:57:55.476220+00:00"
 }
