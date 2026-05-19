@@ -1,41 +1,41 @@
 {
   "quotes": {
     "sp500": {
-      "price": 7403.05,
+      "price": 7343.26,
       "previousClose": 6845.5,
       "marketState": "UNKNOWN",
       "fiftyTwoWeekHigh": 7517.12,
       "fiftyTwoWeekLow": 5767.41,
       "ytdLow": 6316.91,
       "drawdownAtLow": -15.97,
-      "drawdownCurrent": -1.52,
-      "gainFromLow": 17.19,
-      "gainToATH": 1.54
+      "drawdownCurrent": -2.31,
+      "gainFromLow": 16.25,
+      "gainToATH": 2.37
     },
     "ndx": {
-      "price": 28994.37,
+      "price": 28639.32,
       "previousClose": 25249.85,
       "marketState": "UNKNOWN",
       "fiftyTwoWeekHigh": 29678.89,
       "fiftyTwoWeekLow": 20777.97,
       "ytdLow": 22841.42,
       "drawdownAtLow": -23.04,
-      "drawdownCurrent": -2.31,
-      "gainFromLow": 26.94,
-      "gainToATH": 2.36
+      "drawdownCurrent": -3.5,
+      "gainFromLow": 25.38,
+      "gainToATH": 3.63
     },
     "ixic": {
-      "price": 26090.73,
+      "price": 25757.37,
       "previousClose": 23241.99,
       "marketState": "UNKNOWN",
       "fiftyTwoWeekHigh": 26707.14,
       "fiftyTwoWeekLow": 18599.69,
       "ytdLow": 20690.25,
       "drawdownAtLow": -22.53,
-      "drawdownCurrent": -2.31,
-      "gainFromLow": 26.1,
-      "gainToATH": 2.36
+      "drawdownCurrent": -3.56,
+      "gainFromLow": 24.49,
+      "gainToATH": 3.69
     }
   },
-  "timestamp": "2026-05-19T10:52:41.608316+00:00"
+  "timestamp": "2026-05-19T14:33:29.985602+00:00"
 }
