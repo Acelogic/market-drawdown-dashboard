@@ -5,7 +5,7 @@
       "previousClose": 6845.5,
       "marketState": "UNKNOWN",
       "fiftyTwoWeekHigh": 7620.9,
-      "fiftyTwoWeekLow": 6212.69,
+      "fiftyTwoWeekLow": 6271.71,
       "ytdLow": 6316.91,
       "drawdownAtLow": -17.11,
       "drawdownCurrent": -1.72,
@@ -17,7 +17,7 @@
       "previousClose": 25249.85,
       "marketState": "UNKNOWN",
       "fiftyTwoWeekHigh": 30762.2,
-      "fiftyTwoWeekLow": 22673.88,
+      "fiftyTwoWeekLow": 22841.42,
       "ytdLow": 22841.42,
       "drawdownAtLow": -25.75,
       "drawdownCurrent": -8.09,
@@ -29,7 +29,7 @@
       "previousClose": 23241.99,
       "marketState": "UNKNOWN",
       "fiftyTwoWeekHigh": 27190.21,
-      "fiftyTwoWeekLow": 20560.17,
+      "fiftyTwoWeekLow": 20690.25,
       "ytdLow": 20690.25,
       "drawdownAtLow": -23.91,
       "drawdownCurrent": -6.68,
@@ -37,5 +37,5 @@
       "gainToATH": 7.16
     }
   },
-  "timestamp": "2026-07-31T22:40:11.145454+00:00"
+  "timestamp": "2026-08-01T15:06:41.922120+00:00"
 }
