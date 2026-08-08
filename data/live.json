@@ -4,13 +4,13 @@
       "price": 7757.64,
       "previousClose": 6845.5,
       "marketState": "UNKNOWN",
-      "fiftyTwoWeekHigh": 7763.08,
+      "fiftyTwoWeekHigh": 7793.68,
       "fiftyTwoWeekLow": 6316.91,
       "ytdLow": 6316.91,
-      "drawdownAtLow": -18.63,
-      "drawdownCurrent": -0.07,
+      "drawdownAtLow": -18.95,
+      "drawdownCurrent": -0.46,
       "gainFromLow": 22.81,
-      "gainToATH": 0.07
+      "gainToATH": 0.46
     },
     "ndx": {
       "price": 29722.3,
@@ -37,5 +37,5 @@
       "gainToATH": 1.87
     }
   },
-  "timestamp": "2026-08-07T22:22:19.473916+00:00"
+  "timestamp": "2026-08-08T14:38:37.387647+00:00"
 }
