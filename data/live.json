@@ -1,14 +1,14 @@
 {
   "quotes": {
     "sp500": {
-      "price": 7745.38,
+      "price": 7745.06,
       "previousClose": 6845.5,
       "marketState": "UNKNOWN",
       "fiftyTwoWeekHigh": 7816.7,
       "fiftyTwoWeekLow": 6316.91,
       "ytdLow": 6316.91,
       "drawdownAtLow": -19.19,
-      "drawdownCurrent": -0.91,
+      "drawdownCurrent": -0.92,
       "gainFromLow": 22.61,
       "gainToATH": 0.92
     },
@@ -37,5 +37,5 @@
       "gainToATH": 2.05
     }
   },
-  "timestamp": "2026-08-17T20:01:54.576462+00:00"
+  "timestamp": "2026-08-17T20:36:04.570815+00:00"
 }
