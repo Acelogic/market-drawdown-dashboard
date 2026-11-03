@@ -25,7 +25,7 @@
       "gainToATH": 12.05
     },
     "ixic": {
-      "price": 25164.32,
+      "price": 25164.36,
       "previousClose": 23241.99,
       "marketState": "UNKNOWN",
       "fiftyTwoWeekHigh": 27722.75,
@@ -37,5 +37,5 @@
       "gainToATH": 10.17
     }
   },
-  "timestamp": "2026-11-02T22:03:38.432134+00:00"
+  "timestamp": "2026-11-03T04:27:51.902753+00:00"
 }
